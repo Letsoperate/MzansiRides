@@ -65,7 +65,7 @@ Wait for `Tomcat started on port 4000 (http)` in the logs (~15 seconds), then op
 
 | Email | Password | Name |
 |-------|----------|------|
-| `ntoampilp@gmail.com` | `Mzansi@2026` | Lintshiwe Pontsho Ntoampi |
+| `n*******@gmail.com` | `Mzansi@2026` | ******** ******** N******* |
 | `admin@mzansirides.co.za` | `Mzansi@2026` | MzansiRides Super Admin |
 
 ---
