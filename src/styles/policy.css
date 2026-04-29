@@ -1,0 +1,12 @@
+.policy-container {
+    width: clamp(50%, 700px, 100%);
+    margin-inline: auto;
+}
+
+.privacy-text {
+  line-height: 1.6;
+}
+
+.policy-container ul li::marker {
+    color: var(--priClr);
+}

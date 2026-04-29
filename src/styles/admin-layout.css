@@ -1,0 +1,216 @@
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: hsl(210, 12%, 6%);
+  color: hsl(0, 0%, 93%);
+  font-family: "Poppins", sans-serif;
+}
+
+.admin-mobile-toggle {
+  display: none;
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1100;
+  background: hsla(141, 62%, 41%, 0.9);
+  border: none;
+  color: hsl(0, 0%, 100%);
+  font-size: 1.2rem;
+  padding: 0.5em 0.7em;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.admin-sidebar {
+  width: 260px;
+  min-width: 260px;
+  background: hsl(210, 13%, 9%);
+  border-right: 1px solid hsla(141, 55%, 55%, 0.15);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.admin-sidebar-brand {
+  padding: 0 1.5rem 1.5rem;
+  border-bottom: 1px solid hsla(141, 55%, 55%, 0.15);
+  margin-bottom: 1rem;
+}
+
+.admin-sidebar-logo {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: hsl(0, 0%, 100%);
+  letter-spacing: -0.5px;
+}
+
+.admin-sidebar-logo::after {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 3px;
+  background: hsl(141, 60%, 50%);
+  margin-top: 0.25rem;
+  border-radius: 2px;
+}
+
+.admin-sidebar-tagline {
+  font-size: 0.75rem;
+  color: hsl(141, 30%, 60%);
+  margin-top: 0.3rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.admin-sidebar-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0 0.75rem;
+}
+
+.admin-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7em 1em;
+  color: hsl(141, 15%, 65%);
+  text-decoration: none;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.admin-nav-item i {
+  width: 20px;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.admin-nav-item:hover {
+  background: hsla(141, 40%, 30%, 0.15);
+  color: hsl(141, 40%, 85%);
+}
+
+.admin-nav-item.active {
+  background: hsla(141, 55%, 50%, 0.18);
+  color: hsl(141, 62%, 60%);
+  font-weight: 600;
+}
+
+.admin-sidebar-footer {
+  padding: 1rem 0.75rem 0;
+  border-top: 1px solid hsla(141, 55%, 55%, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.admin-logout-btn {
+  background: none;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+}
+
+.admin-logout-btn:hover {
+  background: hsla(0, 70%, 50%, 0.12);
+  color: hsl(0, 60%, 70%);
+}
+
+.admin-sidebar-overlay {
+  display: none;
+}
+
+.admin-main {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.admin-main-content {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (max-width: 960px) {
+  .admin-mobile-toggle {
+    display: block;
+  }
+
+  .admin-sidebar {
+    position: fixed;
+    left: -280px;
+    transition: left 0.3s ease;
+    z-index: 1050;
+  }
+
+  .admin-sidebar.open {
+    left: 0;
+  }
+
+  .admin-sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: hsla(0, 0%, 0%, 0.5);
+    z-index: 1040;
+  }
+
+  .admin-main-content {
+    padding: 1rem;
+  }
+}
+
+.admin-page-header {
+  margin-bottom: 2rem;
+}
+
+.admin-page-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: hsl(0, 0%, 100%);
+  margin: 0;
+}
+
+.admin-page-subtitle {
+  color: hsl(141, 30%, 60%);
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+}
+
+.admin-login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background: hsl(210, 12%, 6%);
+}
+
+.admin-login-logo {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.admin-login-logo h1 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: hsl(0, 0%, 100%);
+  margin: 0;
+}
+
+.admin-login-logo p {
+  font-size: 0.8rem;
+  color: hsl(141, 30%, 60%);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 0.25rem;
+}

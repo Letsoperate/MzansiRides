@@ -1,0 +1,31 @@
+.customer-img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--priClr);
+}
+
+.testimonial-container {
+    padding: 2rem;
+    border-top: 5px solid var(--priClr);
+    position: relative;
+    border-bottom: 0.05em solid var(--priClr)
+}
+.testimonial-container:hover {
+    transform: translateY(-8px);
+}
+
+.customer-wrapper > :first-child {
+    gap: 0.5em;
+}
+
+.customer-info p:not(:last-child) {
+    font-weight: 700;
+    color: hsl(0, 0%, 80%);
+}
+.customer-info p:last-child {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: hsl(0, 0%, 70%);
+}

@@ -1,0 +1,36 @@
+package com.mzansirides.service;
+
+import com.mzansirides.model.SupportTicket;
+import com.mzansirides.repository.SupportTicketRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class SupportTicketService {
+
+    private final SupportTicketRepository supportTicketRepository;
+
+    public SupportTicketService(SupportTicketRepository supportTicketRepository) {
+        this.supportTicketRepository = supportTicketRepository;
+    }
+
+    public List<SupportTicket> getAllTickets() {
+        return supportTicketRepository.findAll();
+    }
+
+    public List<SupportTicket> getOpenTickets() {
+        return supportTicketRepository.findByStatus("open");
+    }
+
+    public SupportTicket createTicket(SupportTicket ticket) {
+        return supportTicketRepository.save(ticket);
+    }
+
+    public SupportTicket updateStatus(Long id, String status) {
+        SupportTicket ticket = supportTicketRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Ticket not found"));
+        ticket.setStatus(status);
+        return supportTicketRepository.save(ticket);
+    }
+}

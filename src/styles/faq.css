@@ -1,0 +1,41 @@
+.faq-wrapper {
+  width: clamp(50%, 700px, 100%);
+  margin-inline: auto;
+  margin-top: 3rem;
+}
+
+.accordion {
+  border: 2px solid var(--grey);
+  border-radius: 5px;
+  padding: 1em;
+}
+.accordion:not(:last-child) {
+  margin-bottom: 1.4rem;
+}
+
+.accordion-container {
+  cursor: pointer;
+  justify-content: space-between;
+  padding-block: .4em;
+}
+.accordion-container i {
+  cursor: pointer;
+  padding-left: 0.5em;
+}
+.accordion-container p {
+  flex: 1;
+}
+
+.accordion-content {
+  display: grid;
+  grid-template-rows: 0fr;
+}
+
+.accordion-content > div {
+  overflow: hidden;
+}
+
+.accordion-content.accordion-open {
+  grid-template-rows: 1fr;
+  padding-top: 1rem;
+}

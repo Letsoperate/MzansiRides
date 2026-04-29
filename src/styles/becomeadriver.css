@@ -1,0 +1,40 @@
+.earn-with-us {
+    padding: clamp(5em, 3vw, 20em);
+    justify-content: center;
+    position: relative;
+}
+.earn-img {
+    width: 600px;
+    transform: rotate(-1deg);
+}
+.earn-bg {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    object-fit: cover;
+    z-index: -1;
+}
+.earn-bg-wrapper {
+    position: absolute;
+    inset: 0;
+    z-index: -100;
+}
+.earn-overlay {
+    z-index: 100;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.89);
+}
+
+@media (max-width: 1090px) {
+    .earn-with-us {
+        flex-direction: column;
+    }
+    .earn-content {
+        text-align: center;
+    }
+}

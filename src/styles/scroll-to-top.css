@@ -1,0 +1,28 @@
+.scroll-to-top {
+  position: fixed;
+  bottom: 2.5rem;
+  right: 3rem;
+  border: 2px solid var(--priClr);
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  background-color: black;
+  z-index: 400;
+  opacity: 0;
+  pointer-events: none;
+  font-size: var(--clamp2);
+}
+
+.animate-button {
+  opacity: 1;
+  pointer-events: all;
+}
+
+@media (max-width: 700px) {
+  .scroll-to-top {
+    bottom: 2.5rem;
+    right: 2rem;
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}

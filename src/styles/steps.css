@@ -1,0 +1,22 @@
+.steps-wrapper {
+    width: 80%;
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+    gap: 4em;
+}
+.steps-title {
+    margin-bottom: 0.6em;
+    font-weight: 800;
+    font-size: 1.3rem;
+}
+
+.steps-img {
+    width: 120px;
+    margin-inline: auto;
+    border-radius: 50%;
+}
+
+.steps-wrapper > div:hover img {
+    transform: scale(1.1);
+}

@@ -1,0 +1,19 @@
+.partners-container {
+    margin-right: 80px;
+}
+
+.partners-logo {
+    width: 120px;
+    margin-inline: auto;
+}
+
+.cars-partners-container {
+    width: clamp(45%, 800px, 80%);
+    margin-inline: auto;
+}
+
+@media (max-width: 1000px) {
+    .partners-logo {
+        width: 25vw;
+    }
+}

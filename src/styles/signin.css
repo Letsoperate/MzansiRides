@@ -1,0 +1,18 @@
+.signin-form {
+  border: 2px solid var(--grey);
+  width: clamp(40%, 600px, 90%);
+
+  border-radius: 10px;
+  padding: 1.5em 1em;
+}
+
+.password-div {
+    position: relative;
+}
+.password-div i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1rem;
+    cursor: pointer;
+}

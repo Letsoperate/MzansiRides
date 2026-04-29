@@ -1,0 +1,43 @@
+.reserve-car-img-container img {
+  width: 50%;
+  margin-inline: auto;
+}
+.reserve-car-info {
+  width: clamp(50%, 700px, 90%);
+  margin-inline: auto;
+  gap: 2em;
+}
+.reserve-car-info > div {
+  flex: 1;
+  border-right: 2px solid var(--priClr);
+  border-left: 2px solid var(--priClr);
+  border-bottom: 2px solid var(--priClr);
+  border-bottom-right-radius: 10px;
+}
+.reserve-input {
+  width: fit-content;
+  margin-right: 0.5em;
+  appearance: none;
+  width: 4px;
+  height: 4px;
+  border: 2px solid var(--priClr);
+}
+.reserve-input:checked {
+  background-color: var(--priClr);
+}
+
+@media (max-width: 785px) {
+  .reserve-car-info {
+    flex-direction: column;
+    gap: 3em;
+  }
+  .reserve-car-info > div {
+    width: 80%;
+  }
+}
+
+@media (max-width: 800px) {
+  .reserve-car-img-container img {
+    width: 100%;
+  }
+}

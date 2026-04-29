@@ -1,0 +1,41 @@
+.map {
+  transform: translateY(-1.5rem);
+}
+.contact-form-container {
+  flex-basis: 60%;
+}
+.contact-form-container form {
+  width: 100%;
+}
+
+.contact-wrapper {
+  padding-block: 2.5em;
+  margin-inline: 5vw;
+  border: 2px solid var(--grey);
+  align-items: flex-start;
+  border-radius: 30px;
+}
+
+textarea {
+  resize: none;
+}
+
+@media (max-width: 900px) {
+  .contact-wrapper {
+    flex-direction: column-reverse;
+    gap: 2em;
+  }
+  .contact-form-container {
+    flex-basis: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-div {
+    flex-direction: column;
+  }
+  .contact-wrapper {
+    border-radius: 10px;
+  }
+}

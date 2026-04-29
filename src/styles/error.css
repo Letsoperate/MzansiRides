@@ -1,0 +1,12 @@
+.error-img {
+    height: 100vh;
+    width: 100vw;
+    object-fit: cover;
+}
+
+.back-to-home {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+}

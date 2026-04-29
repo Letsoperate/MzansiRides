@@ -1,0 +1,36 @@
+.selected-blog-wrapper {
+  display: flex;
+  gap: 2em;
+}
+.rest-blog-container {
+  flex-basis: 150%;
+}
+
+.rest-blog-container img {
+  width: 40%;
+}
+.blog-sub-heading {
+  margin-left: 1.5rem;
+}
+
+@media (max-width: 930px) {
+  .selected-blog-wrapper {
+    flex-direction: column;
+  }
+  .rest-blog-wrapper {
+    gap: 1em;
+  }
+  .rest-blog-container {
+    text-align: center;
+    margin-top: 5em;
+  }
+  .rest-blog-container img {
+    width: 100%;
+  }
+  .blog-sub-heading {
+    margin-left: 1rem;
+  }
+  .reply-container {
+    text-align: center;
+  }
+}

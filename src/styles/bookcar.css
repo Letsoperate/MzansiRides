@@ -1,0 +1,67 @@
+form {
+  width: clamp(50%, 700px, 90%);
+  margin-inline: auto;
+}
+
+.form-wrapper {
+  margin-bottom: var(--clamp2);
+}
+.form-wrapper > div {
+  flex-basis: 48%;
+}
+form p {
+  margin-bottom: 0.3em;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--white);
+}
+form p i {
+  color: var(--priClr);
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  padding: 0.6em;
+  font-weight: 600;
+}
+
+form button {
+  width: 100%;
+  padding-block: 0.8em;
+}
+form button:hover {
+  transform: scale(1.03);
+}
+
+.title-wrapper {
+  position: relative;
+  width: fit-content;
+  margin-inline: auto;
+}
+.underline {
+  position: absolute;
+  bottom: 0%;
+  left: 50%;
+  top: 50%;
+  width: 60px;
+  z-index: -100;
+  transform: translateX(-50%) translateY(-50%) rotate(-20deg);
+}
+
+
+@media (max-width: 500px) {
+  .form-wrapper > div {
+    width: 100%;
+  }
+  .form-wrapper {
+    flex-direction: column;
+  }
+  .form-wrapper div:not(:last-child),
+  .form-wrapper:not(:last-child) {
+    margin-bottom: var(--clamp2);
+  }
+}

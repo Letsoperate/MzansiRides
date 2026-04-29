@@ -1,0 +1,198 @@
+@import url("https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,800&family=Quicksand:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Concert+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Corben&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Quicksand", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+img,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--white);
+}
+
+label {
+  cursor: pointer;
+}
+input[type="checkbox"],
+input[type="file"] {
+  cursor: pointer;
+}
+
+body {
+  background-color: hsl(210, 9%, 10%);
+  background-image: radial-gradient(
+      circle at 14% 15%,
+      hsla(141, 62%, 41%, 0.25),
+      transparent 35%
+    ),
+    radial-gradient(circle at 85% 8%, hsla(45, 90%, 56%, 0.18), transparent 30%),
+    linear-gradient(160deg, hsl(210, 9%, 10%) 0%, hsl(210, 9%, 6%) 100%);
+}
+
+:root {
+  --priClr: hsl(141, 62%, 41%);
+  --navyClr: hsl(215, 62%, 23%);
+  --lightClr: hsl(42, 92%, 91%);
+  --orangeClr: hsl(45, 90%, 56%);
+  --darkClr: hsl(0, 0%, 7%);
+  --white: hsl(0, 0%, 100%);
+  --grey: hsl(0, 0%, 56%);
+  --black: hsl(0, 0%, 0%);
+
+  /* CLAMPS: */
+  --clampMin: clamp(0.5rem, 0.95vw, 1.5rem);
+  --clamp1: clamp(1rem, 1vw, 3rem);
+  --clamp2: clamp(1.5rem, 1vw, 4rem);
+  --clamp3: clamp(1.9rem, 2vw, 6rem);
+  --clamp4: clamp(3rem, 2vw, 9rem);
+  --clamp5: clamp(4rem, 2vw, 10rem);
+}
+
+::selection {
+  background-color: var(--lightClr);
+  color: black;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--priClr) transparent;
+}
+
+html::-webkit-scrollbar {
+  width: 0.5vw;
+}
+html::-webkit-scrollbar-thumb {
+  background-color: var(--priClr);
+  border-radius: 30px;
+}
+html::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* UTILITY: */
+.constant-padding {
+  padding-inline: 5vw;
+}
+.constant-margin {
+  margin-bottom: 9em;
+}
+.header-margin {
+  margin-bottom: var(--clamp3);
+}
+.sub-header-margin {
+  margin-bottom: var(--clamp1);
+}
+.header-margin2 {
+  margin-bottom: var(--clamp4);
+}
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+}
+.flex-plain {
+  display: flex;
+  align-items: center;
+}
+.flex-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sec-font {
+  font-family: "Bubblegum Sans", sans-serif;
+}
+.sec-font2 {
+  font-family: "Abril Fatface", Arial, Helvetica, sans-serif;
+}
+.sec-font3 {
+  font-family: "Concert One", Arial, Helvetica, sans-serif;
+  letter-spacing: 1px;
+}
+.sec-font4 {
+  font-family: "Corben", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+}
+.pri-bg {
+  background-color: var(--priClr);
+}
+.sec-bg {
+  background-color: var(--black);
+}
+sec-bg2 {
+  background-color: var(--grey);
+}
+.sec-font-clr2 {
+  color: var(--priClr);
+}
+.pri-font-clr {
+  color: var(--white);
+}
+.sec-font-clr {
+  color: var(--grey);
+}
+.min-font {
+  font-size: var(--clampMin);
+}
+.standard-fz {
+  font-size: var(--clamp1);
+}
+.standard-fz2 {
+  font-size: var(--clamp2);
+}
+.standard-fz3 {
+  font-size: var(--clamp3);
+}
+.title-fz {
+  font-size: var(--clamp3);
+}
+.btn-padding {
+  padding: 8px 15px;
+}
+.scale:hover {
+  transform: scale(1.1);
+}
+.scale:focus-within {
+  transform: scale(1.1);
+}
+.transition {
+  transition: all 0.3s ease;
+}
+.align {
+  text-align: center;
+}
+.standard-weight {
+  font-weight: 600;
+}
+.shadow {
+  box-shadow: 2px 10px 20px -5px hsla(0, 0%, 0%, 0.747);
+}
+.spacing {
+  letter-spacing: 1px;
+}
+
+@media (max-width: 1000px) {
+  :root {
+    --clampMin: clamp(0.8rem, 0.9vw, 1.5rem);
+  }
+}

@@ -1,0 +1,77 @@
+.about-hero-container > div {
+  flex: 1;
+}
+
+.about-img {
+  animation: bop 1s ease-in-out infinite alternate;
+}
+@keyframes bop {
+  to {
+    transform: scale(1.03);
+  }
+}
+
+.about-writeup {
+  position: relative;
+  margin-inline: 5vw;
+}
+.about-newsletter-container {
+  justify-content: center;
+  gap: 3em;
+}
+.phone-gif {
+  width: 200px;
+  border-radius: 50%;
+}
+
+.team-container {
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+.team-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(6px);
+  justify-content: center;
+  top: -100%;
+}
+.team-container:hover .team-overlay {
+  top: 0%;
+}
+
+.offers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+}
+
+.team-content {
+  padding-bottom: 2em;
+}
+
+@media (max-width: 950px) {
+  .about-hero-container {
+    flex-direction: column;
+  }
+  .offers {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+  .about-titles {
+    text-align: center;
+  }
+  .about-newsletter-container {
+    flex-direction: column-reverse;
+  }
+  .about-newsletter {
+    flex-direction: column;
+  }
+  .about-newsletter, .about-sub-title  {
+    text-align: center;
+  }
+}

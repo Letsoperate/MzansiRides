@@ -1,0 +1,408 @@
+.admin-shell {
+  color: hsl(210, 100%, 97%);
+}
+
+.admin-card,
+.admin-panel {
+  background: linear-gradient(
+    145deg,
+    hsla(141, 40%, 35%, 0.15),
+    hsla(210, 30%, 10%, 0.6)
+  );
+  border: 1px solid hsla(141, 55%, 55%, 0.35);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+}
+
+.admin-card {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: clamp(1.3rem, 3vw, 2.4rem);
+}
+
+.admin-title {
+  color: hsl(0, 0%, 100%);
+  font-size: clamp(1.6rem, 2vw, 2.3rem);
+}
+
+.admin-subtitle {
+  margin-top: 0.5rem;
+  margin-bottom: 1.3rem;
+  color: hsl(141, 20%, 75%);
+  line-height: 1.45;
+}
+
+.admin-form-group input,
+.admin-note-input,
+.admin-modal-input {
+  width: 100%;
+  border: 1px solid hsla(141, 45%, 50%, 0.45);
+  background: hsla(141, 15%, 7%, 0.85);
+  color: hsl(0, 0%, 100%);
+  border-radius: 12px;
+  padding: 0.9em 1em;
+  outline: none;
+}
+
+.admin-form-group input:focus,
+.admin-note-input:focus,
+.admin-modal-input:focus {
+  border-color: hsl(141, 62%, 41%);
+  box-shadow: 0 0 0 3px hsla(141, 62%, 41%, 0.25);
+}
+
+.admin-primary-btn,
+.admin-secondary-btn,
+.admin-danger-btn {
+  margin-top: 0.5rem;
+  border-radius: 10px;
+  padding: 0.8em 1.3em;
+  font-size: 0.95rem;
+  letter-spacing: 0.4px;
+  border: none;
+  cursor: pointer;
+}
+
+.admin-primary-btn {
+  width: 100%;
+  background: linear-gradient(135deg, hsl(141, 62%, 41%), hsl(141, 50%, 35%));
+  color: hsl(0, 0%, 100%);
+  font-weight: 600;
+}
+.admin-primary-btn:hover {
+  background: linear-gradient(135deg, hsl(141, 65%, 45%), hsl(141, 55%, 38%));
+  box-shadow: 0 4px 15px hsla(141, 62%, 41%, 0.3);
+}
+.admin-primary-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-secondary-btn {
+  background-color: hsla(141, 40%, 35%, 0.14);
+  border: 1px solid hsla(141, 55%, 55%, 0.5);
+  color: hsl(141, 60%, 75%);
+}
+.admin-secondary-btn:hover {
+  background-color: hsla(141, 40%, 35%, 0.25);
+}
+
+.admin-danger-btn {
+  background: linear-gradient(135deg, hsl(0, 70%, 50%), hsl(0, 60%, 40%));
+  color: hsl(0, 0%, 100%);
+  font-weight: 600;
+}
+
+.admin-sm-btn {
+  padding: 0.35em 0.75em;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid hsla(141, 55%, 55%, 0.4);
+  background: hsla(141, 40%, 30%, 0.2);
+  color: hsl(141, 40%, 80%);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.admin-sm-btn:hover {
+  background: hsla(141, 62%, 41%, 0.3);
+}
+.admin-sm-btn.danger {
+  border-color: hsla(0, 70%, 50%, 0.5);
+  color: hsl(0, 70%, 70%);
+}
+.admin-sm-btn.danger:hover {
+  background: hsla(0, 70%, 40%, 0.2);
+}
+
+.admin-note-wrapper {
+  margin-top: 1rem;
+}
+
+.admin-note {
+  color: hsl(141, 40%, 75%);
+}
+
+.admin-back-link {
+  display: inline-block;
+  margin-top: 0.7rem;
+  text-decoration: none;
+  color: hsl(141, 60%, 65%);
+}
+
+.admin-error {
+  color: hsl(6, 96%, 73%);
+  margin-bottom: 0.8rem;
+}
+
+.admin-success {
+  color: hsl(141, 60%, 60%);
+  margin-bottom: 0.8rem;
+}
+
+.admin-dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.admin-stats-grid .admin-panel {
+  text-align: center;
+  padding: 1.5rem 1rem;
+}
+
+.admin-stat-value {
+  color: hsl(141, 62%, 41%);
+  font-size: clamp(1.7rem, 2.1vw, 2.6rem);
+}
+
+.admin-stat-label {
+  color: hsl(141, 30%, 75%);
+  margin-top: 0.25rem;
+}
+
+.admin-layout-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.admin-panel {
+  padding: 1.2rem;
+}
+
+.admin-panel-title {
+  color: hsl(0, 0%, 100%);
+  margin-bottom: 0.5rem;
+}
+
+.admin-panel-text {
+  color: hsl(141, 30%, 75%);
+  line-height: 1.45;
+  margin-bottom: 0.8rem;
+}
+
+.admin-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.admin-pill {
+  background-color: hsla(141, 40%, 35%, 0.2);
+  color: hsl(141, 55%, 65%);
+  border: 1px solid hsla(141, 55%, 55%, 0.35);
+  border-radius: 999px;
+  padding: 0.25em 0.8em;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.admin-pill:hover {
+  background-color: hsla(141, 62%, 41%, 0.3);
+}
+.admin-pill.active {
+  background-color: hsla(141, 62%, 41%, 0.4);
+  color: hsl(0, 0%, 100%);
+}
+
+.admin-list {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.admin-list-item {
+  color: hsl(141, 30%, 85%);
+}
+
+.admin-checklist {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.admin-check-item {
+  color: hsl(141, 30%, 85%);
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  cursor: pointer;
+}
+
+.admin-check-item input {
+  accent-color: hsl(141, 62%, 41%);
+}
+
+.admin-note-input {
+  margin-bottom: 0.7rem;
+  resize: vertical;
+}
+
+.admin-table-wrapper {
+  overflow-x: auto;
+  margin: 0.5rem 0;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.admin-table th {
+  text-align: left;
+  color: hsl(141, 55%, 65%);
+  padding: 0.6em 0.5em;
+  border-bottom: 1px solid hsla(141, 55%, 55%, 0.3);
+  font-weight: 600;
+}
+
+.admin-table td {
+  padding: 0.5em 0.5em;
+  color: hsl(141, 30%, 85%);
+  border-bottom: 1px solid hsla(141, 55%, 40%, 0.1);
+}
+
+.admin-table .actions {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.admin-status-badge {
+  display: inline-block;
+  padding: 0.15em 0.6em;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.admin-status-badge.available,
+.admin-status-badge.active {
+  background: hsla(141, 60%, 40%, 0.25);
+  color: hsl(141, 50%, 70%);
+}
+.admin-status-badge.pending {
+  background: hsla(45, 90%, 56%, 0.2);
+  color: hsl(45, 80%, 65%);
+}
+.admin-status-badge.maintenance,
+.admin-status-badge.resolved {
+  background: hsla(0, 70%, 50%, 0.2);
+  color: hsl(0, 70%, 70%);
+}
+.admin-status-badge.booked {
+  background: hsla(var(--priClr-hue, 205), 70%, 55%, 0.2);
+  color: hsl(205, 70%, 65%);
+}
+.admin-status-badge.completed,
+.admin-status-badge.approved {
+  background: hsla(141, 50%, 35%, 0.25);
+  color: hsl(141, 45%, 65%);
+}
+
+/* Modal */
+.admin-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: hsla(210, 9%, 5%, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.admin-modal {
+  background: linear-gradient(145deg, hsl(210, 10%, 12%), hsl(210, 12%, 8%));
+  border: 1px solid hsla(141, 55%, 55%, 0.35);
+  border-radius: 20px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 480px;
+  backdrop-filter: blur(12px);
+}
+
+.admin-modal h3 {
+  color: hsl(0, 0%, 100%);
+  margin-bottom: 1rem;
+}
+
+.admin-modal-form-group {
+  margin-bottom: 0.8rem;
+}
+
+.admin-modal-form-group label {
+  display: block;
+  color: hsl(141, 40%, 75%);
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.admin-modal-input {
+  width: 100%;
+}
+
+.admin-modal-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: 0.5em 1em;
+  border-radius: 8px;
+  border: 1px solid hsla(141, 55%, 55%, 0.3);
+  background: hsla(141, 40%, 30%, 0.1);
+  color: hsl(141, 40%, 75%);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.tab-btn:hover {
+  background: hsla(141, 62%, 41%, 0.2);
+}
+.tab-btn.active {
+  background: hsla(141, 62%, 41%, 0.35);
+  color: hsl(0, 0%, 100%);
+  border-color: hsl(141, 62%, 41%);
+}
+
+@media (max-width: 980px) {
+  .admin-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .admin-layout-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .admin-dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .admin-secondary-btn {
+    width: 100%;
+  }
+  .admin-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

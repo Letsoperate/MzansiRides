@@ -1,0 +1,15 @@
+.blog-content-container {
+  padding: 0em 1em .7em;
+}
+.poster-content {
+    padding-top: var(--clamp1);
+  border-top: 2px solid var(--black);
+}
+.details {
+    gap: .6em;
+}
+.blog-btn {
+  font-size: .9rem;
+  color: var(--priClr);
+  display: inline-block;
+}
