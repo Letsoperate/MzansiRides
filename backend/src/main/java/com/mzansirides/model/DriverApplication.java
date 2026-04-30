@@ -29,6 +29,12 @@ public class DriverApplication {
     @Column
     private String city;
 
+    @Column(name = "license_doc")
+    private String licenseDoc;
+
+    @Column(name = "passport_doc")
+    private String passportDoc;
+
     public DriverApplication() {}
 
     public Long getId() { return id; }
@@ -51,4 +57,10 @@ public class DriverApplication {
 
     public String getCity() { return city; }
     public void setCity(String city) { this.city = city; }
+
+    public String getLicenseDoc() { return licenseDoc; }
+    public void setLicenseDoc(String licenseDoc) { this.licenseDoc = licenseDoc; }
+
+    public String getPassportDoc() { return passportDoc; }
+    public void setPassportDoc(String passportDoc) { this.passportDoc = passportDoc; }
 }

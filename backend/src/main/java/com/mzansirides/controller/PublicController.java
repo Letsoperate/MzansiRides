@@ -54,24 +54,43 @@ public class PublicController {
         booking.setCarName(request.carName());
         booking.setPhone(request.phone());
         booking.setEmail(request.email());
-        booking.setStatus("pending");
+        booking.setCheckoutTime(request.checkoutTime());
+        booking.setDropoffTime(request.dropoffTime());
+        booking.setPickupType(request.pickupType() != null ? request.pickupType() : "SELF");
+        booking.setPickupAddress(request.pickupAddress());
+        booking.setPickupLat(request.pickupLat());
+        booking.setPickupLng(request.pickupLng());
+        booking.setExtras(request.extras());
+        booking.setPaymentAmount(request.totalAmount());
+        booking.setStatus("pending_approval");
+        booking.setPaymentStatus("UNPAID");
         booking.setCheckoutDate(request.checkoutDate() != null ?
                 LocalDate.parse(request.checkoutDate()) : LocalDate.now().plusDays(1));
         booking.setCreatedAt(LocalDateTime.now());
-        Booking saved = bookingService.createBooking(booking);
+        return ResponseEntity.status(HttpStatus.CREATED).body(bookingService.create(booking));
+    }
 
-        if (request.email() != null && !request.email().isBlank()) {
-            try {
-                emailService.sendBookingConfirmation(
-                        request.email(), request.customerName(),
-                        request.carName() != null ? request.carName() : "Vehicle",
-                        request.city() != null ? request.city() : "Not specified",
-                        saved.getCheckoutDate().toString());
-            } catch (Exception ignored) {
-            }
+    @GetMapping("/booking/{token}")
+    public ResponseEntity<?> getBookingByToken(@PathVariable String token) {
+        try {
+            Booking b = bookingService.getByToken(token);
+            return ResponseEntity.ok(b);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(Map.of("message", "Booking not found"));
         }
+    }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    @PostMapping("/booking/{token}/confirm-payment")
+    public ResponseEntity<?> confirmPayment(@PathVariable String token, @RequestBody Map<String, Object> body) {
+        try {
+            Booking b = bookingService.getByToken(token);
+            String ref = (String) body.getOrDefault("paymentRef", "DEMO-"+System.currentTimeMillis());
+            int amount = body.containsKey("amount") ? ((Number) body.get("amount")).intValue() : 0;
+            Booking updated = bookingService.confirmPayment(b.getId(), ref, amount);
+            return ResponseEntity.ok(updated);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
+        }
     }
 
     @PostMapping("/drivers")

@@ -5,16 +5,16 @@ import "../../styles/admin-layout.css";
 
 const navItems = [
   { path: "/admin/dashboard", icon: "fa-gauge-high", label: "Dashboard" },
-  { path: "/admin/dashboard", icon: "fa-car", label: "Fleet" },
-  { path: "/admin/dashboard", icon: "fa-calendar-check", label: "Bookings" },
-  { path: "/admin/dashboard", icon: "fa-id-card", label: "Drivers" },
-  { path: "/admin/dashboard", icon: "fa-ticket", label: "Support" },
+  { path: "/admin/fleet", icon: "fa-car", label: "Fleet" },
+  { path: "/admin/bookings", icon: "fa-calendar-check", label: "Bookings" },
+  { path: "/admin/drivers", icon: "fa-id-card", label: "Drivers" },
+  { path: "/admin/support", icon: "fa-headset", label: "Support" },
 ];
 
 export default function AdminLayout() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [mobileNav, setMobileNav] = useState(false);
   const isLoginPage = location.pathname === "/admin/login";
 
   function handleLogout() {
@@ -28,43 +28,41 @@ export default function AdminLayout() {
 
   return (
     <div className="admin-layout">
-      <button className="admin-mobile-toggle" onClick={() => setSidebarOpen(!sidebarOpen)}>
-        <i className={`fa-solid ${sidebarOpen ? "fa-xmark" : "fa-bars"}`}></i>
-      </button>
-
-      <aside className={`admin-sidebar ${sidebarOpen ? "open" : ""}`}>
-        <div className="admin-sidebar-brand">
-          <h1 className="admin-sidebar-logo">MzansiRides</h1>
-          <p className="admin-sidebar-tagline">Admin Control Panel</p>
+      <header className="admin-topbar">
+        <div className="admin-topbar-brand">
+          <h1>MzansiRides</h1>
+          <span>Admin Panel</span>
         </div>
 
-        <nav className="admin-sidebar-nav">
+        <button className="admin-nav-toggle" onClick={() => setMobileNav(!mobileNav)}>
+          <i className={`fa-solid ${mobileNav ? "fa-xmark" : "fa-bars"}`}></i>
+        </button>
+
+        <nav className={`admin-topnav ${mobileNav ? "open" : ""}`}>
           {navItems.map((item) => (
             <Link
-              key={item.label}
+              key={item.path}
               to={item.path}
-              onClick={() => setSidebarOpen(false)}
-              className={`admin-nav-item ${location.pathname === item.path ? "active" : ""}`}
+              onClick={() => setMobileNav(false)}
+              className={`admin-topnav-link ${location.pathname === item.path ? "active" : ""}`}
             >
               <i className={`fa-solid ${item.icon}`}></i>
               <span>{item.label}</span>
             </Link>
           ))}
-        </nav>
-
-        <div className="admin-sidebar-footer">
-          <Link to="/home" className="admin-nav-item" onClick={() => setSidebarOpen(false)}>
+          <span className="admin-topnav-spacer"></span>
+          <Link to="/home" className="admin-topnav-link">
             <i className="fa-solid fa-arrow-left"></i>
-            <span>Back to Website</span>
+            <span>Site</span>
           </Link>
-          <button onClick={handleLogout} className="admin-nav-item admin-logout-btn">
+          <button onClick={handleLogout} className="admin-topnav-link admin-logout-link">
             <i className="fa-solid fa-right-from-bracket"></i>
             <span>Logout</span>
           </button>
-        </div>
-      </aside>
+        </nav>
+      </header>
 
-      {sidebarOpen && <div className="admin-sidebar-overlay" onClick={() => setSidebarOpen(false)}></div>}
+      {mobileNav && <div className="admin-nav-overlay" onClick={() => setMobileNav(false)}></div>}
 
       <main className="admin-main">
         <div className="admin-main-content">

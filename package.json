@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "dev:api": "fuser -k 4000/tcp 2>/dev/null; sleep 1; cd backend && mvn -o spring-boot:run",
-    "dev:full": "fuser -k 4000/tcp 2>/dev/null; sleep 1; concurrently \"cd backend && mvn -o spring-boot:run\" \"vite\"",
+    "dev:full": "bash start.sh",
     "build": "vite build",
     "build:api": "cd backend && mvn -o clean package -DskipTests",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",

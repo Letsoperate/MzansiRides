@@ -57,4 +57,28 @@ public class FileUploadController {
                     .body(Map.of("message", "Failed to save file: " + e.getMessage()));
         }
     }
+
+    @PostMapping("/driver-doc")
+    public ResponseEntity<?> uploadDriverDoc(@RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
+            return ResponseEntity.badRequest().body(Map.of("message", "No file provided"));
+        }
+
+        String originalName = file.getOriginalFilename();
+        String extension = "";
+        if (originalName != null && originalName.contains(".")) {
+            extension = originalName.substring(originalName.lastIndexOf("."));
+        }
+        String filename = UUID.randomUUID().toString() + extension;
+
+        try {
+            Path targetPath = uploadDir.resolve(filename);
+            file.transferTo(targetPath.toFile());
+            String url = "/uploads/cars/" + filename;
+            return ResponseEntity.ok(Map.of("url", url, "filename", filename));
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("message", "Failed to save file: " + e.getMessage()));
+        }
+    }
 }

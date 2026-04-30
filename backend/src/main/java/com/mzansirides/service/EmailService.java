@@ -46,7 +46,81 @@ public class EmailService {
     public void sendBookingConfirmation(String to, String fullName, String carName, String city, String checkoutDate) {
         String subject = "MzansiRides - Booking Confirmed";
         String body = buildBookingTemplate(fullName, carName, city, checkoutDate);
-        sendHtml(to, subject, body);
+        sendEmail(to, subject, body);
+    }
+
+    public void sendBookingReceived(String to, String fullName, String carName) {
+        String subject = "MzansiRides - Booking Received";
+        String body = """
+            <!DOCTYPE html><html><head><meta charset="UTF-8"></head>
+            <body style="margin:0;padding:0;font-family:Arial,sans-serif;background-color:#1a1a2e;color:#e0e0e0">
+            <table width="100%%" cellpadding="0" cellspacing="0" style="background-color:#1a1a2e;padding:40px 0">
+            <tr><td align="center"><table width="560" style="background-color:#16213e;border-radius:12px;overflow:hidden">
+            <tr><td style="background-color:#0f3460;padding:30px 40px;text-align:center">
+            <h1 style="margin:0;color:#e94560;font-size:26px">MzansiRides</h1>
+            <p style="margin:8px 0 0;color:#a0a0b0;font-size:14px">Booking Received</p></td></tr>
+            <tr><td style="padding:40px">
+            <h2 style="margin:0 0 16px;color:#fff;font-size:22px">Booking Received</h2>
+            <p style="margin:0 0 8px;color:#c0c0d0;font-size:15px">Hi %s,</p>
+            <p style="margin:0 0 24px;color:#a0a0b0;font-size:14px;line-height:1.6">Your booking for <strong>%s</strong> has been received and is pending approval. You will receive an email once it's reviewed.</p>
+            </td></tr>
+            <tr><td style="background-color:#0f3460;padding:20px 40px;text-align:center">
+            <p style="margin:0;color:#707080;font-size:11px">&copy; %d MzansiRides</p></td></tr>
+            </table></td></tr></table></body></html>
+            """.formatted(fullName, carName != null ? carName : "Vehicle", java.time.Year.now().getValue());
+        sendEmail(to, subject, body);
+    }
+
+    public void sendPaymentLink(String to, String fullName, String carName, int amount, String link) {
+        String subject = "MzansiRides - Booking Approved - Complete Payment";
+        String body = """
+            <!DOCTYPE html><html><head><meta charset="UTF-8"></head>
+            <body style="margin:0;padding:0;font-family:Arial,sans-serif;background-color:#1a1a2e;color:#e0e0e0">
+            <table width="100%%" cellpadding="0" cellspacing="0" style="background-color:#1a1a2e;padding:40px 0">
+            <tr><td align="center"><table width="560" style="background-color:#16213e;border-radius:12px;overflow:hidden">
+            <tr><td style="background-color:#0f3460;padding:30px 40px;text-align:center">
+            <h1 style="margin:0;color:#e94560;font-size:26px">MzansiRides</h1>
+            <p style="margin:8px 0 0;color:#a0a0b0;font-size:14px">Booking Approved</p></td></tr>
+            <tr><td style="padding:40px">
+            <h2 style="margin:0 0 16px;color:#fff;font-size:22px">Your Booking is Approved!</h2>
+            <p style="margin:0 0 8px;color:#c0c0d0;font-size:15px">Hi %s, your booking for <strong>%s</strong> has been approved.</p>
+            <p style="margin:0 0 8px;color:#f59e0b;font-size:20px;font-weight:700">Amount: R%s</p>
+            <p style="margin:0 0 24px;color:#a0a0b0;font-size:14px">Click below to complete payment and confirm your reservation.</p>
+            <table cellpadding="0" cellspacing="0"><tr><td align="center" style="background-color:#e94560;border-radius:8px">
+            <a href="%s" style="display:inline-block;padding:14px 36px;color:#fff;text-decoration:none;font-size:15px;font-weight:700">Pay Now</a>
+            </td></tr></table></td></tr>
+            <tr><td style="background-color:#0f3460;padding:20px 40px;text-align:center">
+            <p style="margin:0;color:#707080;font-size:11px">&copy; %d MzansiRides</p></td></tr>
+            </table></td></tr></table></body></html>
+            """.formatted(fullName, carName != null ? carName : "Vehicle", String.valueOf(amount), link, java.time.Year.now().getValue());
+        sendEmail(to, subject, body);
+    }
+
+    public void sendReceipt(String to, String fullName, String carName, String receiptNo, int amount, String ref, String date) {
+        String subject = "MzansiRides - Payment Receipt #" + receiptNo;
+        String body = """
+            <!DOCTYPE html><html><head><meta charset="UTF-8"></head>
+            <body style="margin:0;padding:0;font-family:Arial,sans-serif;background-color:#1a1a2e;color:#e0e0e0">
+            <table width="100%%" cellpadding="0" cellspacing="0" style="background-color:#1a1a2e;padding:40px 0">
+            <tr><td align="center"><table width="560" style="background-color:#16213e;border-radius:12px;overflow:hidden">
+            <tr><td style="background-color:#0f3460;padding:30px 40px;text-align:center">
+            <h1 style="margin:0;color:#e94560;font-size:26px">MzansiRides</h1>
+            <p style="margin:8px 0 0;color:#a0a0b0;font-size:14px">Payment Receipt</p></td></tr>
+            <tr><td style="padding:40px">
+            <h2 style="margin:0 0 16px;color:#4ade80;font-size:22px">Payment Confirmed!</h2>
+            <table cellpadding="8" style="background-color:#1a1a2e;border-radius:8px;width:100%%">
+            <tr><td style="color:#a0a0b0;font-size:13px;font-weight:600">Receipt No</td><td style="color:#e0e0e0;font-size:14px">%s</td></tr>
+            <tr><td style="color:#a0a0b0;font-size:13px;font-weight:600">Customer</td><td style="color:#e0e0e0;font-size:14px">%s</td></tr>
+            <tr><td style="color:#a0a0b0;font-size:13px;font-weight:600">Vehicle</td><td style="color:#e0e0e0;font-size:14px">%s</td></tr>
+            <tr><td style="color:#a0a0b0;font-size:13px;font-weight:600">Amount Paid</td><td style="color:#4ade80;font-size:16px;font-weight:700">R%s</td></tr>
+            <tr><td style="color:#a0a0b0;font-size:13px;font-weight:600">Reference</td><td style="color:#e0e0e0;font-size:14px">%s</td></tr>
+            <tr><td style="color:#a0a0b0;font-size:13px;font-weight:600">Date</td><td style="color:#e0e0e0;font-size:14px">%s</td></tr>
+            </table></td></tr>
+            <tr><td style="background-color:#0f3460;padding:20px 40px;text-align:center">
+            <p style="margin:0;color:#707080;font-size:11px">&copy; %d MzansiRides</p></td></tr>
+            </table></td></tr></table></body></html>
+            """.formatted(receiptNo, fullName, carName != null ? carName : "Vehicle", String.valueOf(amount), ref, date, java.time.Year.now().getValue());
+        sendEmail(to, subject, body);
     }
 
     public void sendWelcomeEmail(String to, String fullName) {

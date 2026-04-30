@@ -14,10 +14,15 @@ import SignIn from "../pages/SignIn";
 import Error from "../pages/Error";
 import Reserve from "../pages/Reserve";
 import AdminLogin from "../pages/AdminLogin";
-import AdminDashboard from "../pages/AdminDashboard";
+import DashboardPage from "../pages/admin/DashboardPage";
+import FleetPage from "../pages/admin/FleetPage";
+import BookingsPage from "../pages/admin/BookingsPage";
+import DriversPage from "../pages/admin/DriversPage";
+import SupportPage from "../pages/admin/SupportPage";
 import ForgotPassword from "../pages/ForgotPassword";
 import ResetPassword from "../pages/ResetPassword";
 import VerifyEmail from "../pages/VerifyEmail";
+import PaymentPage from "../pages/PaymentPage";
 import Unsubscribe from "../pages/Unsubscribe";
 import Layout from "../components/Layout/Layout";
 import AdminLayout from "../components/Layout/AdminLayout";
@@ -56,6 +61,7 @@ export default function AppRoutes() {
           <Route path="/FAQS" element={<Faq />} />
           <Route path="/privacy-policy" element={<Policy />} />
           <Route path="/reserve/:id" element={<Reserve />} />
+          <Route path="/payment/:token" element={<PaymentPage />} />
           <Route path="/unsubscribe" element={<Unsubscribe />} />
           <Route path="*" element={<Error />} />
         </Route>
@@ -63,14 +69,11 @@ export default function AppRoutes() {
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Navigate to="/admin/dashboard" replace />} />
           <Route path="login" element={<AdminLogin />} />
-          <Route
-            path="dashboard"
-            element={
-              <AdminProtectedRoute>
-                <AdminDashboard />
-              </AdminProtectedRoute>
-            }
-          />
+          <Route path="dashboard" element={<AdminProtectedRoute><DashboardPage /></AdminProtectedRoute>} />
+          <Route path="fleet" element={<AdminProtectedRoute><FleetPage /></AdminProtectedRoute>} />
+          <Route path="bookings" element={<AdminProtectedRoute><BookingsPage /></AdminProtectedRoute>} />
+          <Route path="drivers" element={<AdminProtectedRoute><DriversPage /></AdminProtectedRoute>} />
+          <Route path="support" element={<AdminProtectedRoute><SupportPage /></AdminProtectedRoute>} />
         </Route>
       </Routes>
       <ScrollToTop />

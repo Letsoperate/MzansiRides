@@ -5,6 +5,7 @@ import com.mzansirides.repository.DriverApplicationRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DriverApplicationService {
@@ -31,6 +32,14 @@ public class DriverApplicationService {
         DriverApplication app = driverApplicationRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Application not found"));
         app.setStatus(status);
+        return driverApplicationRepository.save(app);
+    }
+
+    public DriverApplication updateFields(Long id, Map<String, String> fields) {
+        DriverApplication app = driverApplicationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Application not found"));
+        if (fields.containsKey("licenseDoc")) app.setLicenseDoc(fields.get("licenseDoc"));
+        if (fields.containsKey("passportDoc")) app.setPassportDoc(fields.get("passportDoc"));
         return driverApplicationRepository.save(app);
     }
 }
