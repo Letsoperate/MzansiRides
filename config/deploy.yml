@@ -28,8 +28,8 @@ env:
   clear:
     SPRING_PROFILES_ACTIVE: prod
     SPRING_DATASOURCE_URL: jdbc:postgresql://mzansirides-db:5432/mzansirides
+    SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
     SPRING_DATASOURCE_USERNAME: mzansirides
-    SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
     SPRING_JPA_HIBERNATE_DDL_AUTO: update
     SPRING_SERVLET_MULTIPART_MAX_FILE_SIZE: 10MB
     SPRING_SERVLET_MULTIPART_MAX_REQUEST_SIZE: 10MB
