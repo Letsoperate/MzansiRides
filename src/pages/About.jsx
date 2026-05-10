@@ -23,7 +23,7 @@ export default function About() {
   const teamData = [
     {
       id: 1,
-      imgSrc: "https://ui-avatars.com/api/?name=Lintshiwe+Ntoampi&size=400&background=e94560&color=fff&bold=true",
+      imgSrc: "/uploads/cars/lintshiwe-profile.jpeg",
       teamName: "Lintshiwe Pontsho Ntoampi",
       teamPosition: "Founder & CEO",
     },
