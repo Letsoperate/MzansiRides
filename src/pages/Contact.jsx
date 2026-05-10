@@ -63,7 +63,7 @@ export default function Contact() {
       <div className="header-margin">
         <div className="map">
           <iframe
-            src="https://www.google.com/maps?q=Johannesburg%2C%20South%20Africa&output=embed"
+            src="https://www.google.com/maps?q=Emalahleni%2C%20Mpumalanga%2C%20South%20Africa&output=embed"
             width="100%"
             height="450"
             style={{ border: "0" }}
@@ -77,6 +77,15 @@ export default function Contact() {
           <p className="standard-weight align pri-font-clr standard-fz2 header-margin">
             Contact Information
           </p>
+          <div
+            style={{ gap: ".5em" }}
+            className="flex-plain standard-fz sec-font-clr header-margin"
+          >
+            <i className="fa-solid fa-location-dot sec-font-clr2"></i>
+            <span className="sec-font-clr">
+              Emalahleni (Witbank), Mpumalanga, South Africa
+            </span>
+          </div>
           <div
             style={{ gap: ".5em" }}
             className="flex-plain standard-fz sec-font-clr header-margin"

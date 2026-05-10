@@ -192,6 +192,10 @@ export default function Footer() {
           </a>
         </div>
         <div className="location">
+          <p className="min-font sec-font-clr standard-weight" style={{marginBottom: "0.3em"}}>
+            <i className="fa-solid fa-location-dot sec-font-clr"></i>{" "}
+            Emalahleni (Witbank), Mpumalanga
+          </p>
           <p className="min-font sec-font-clr standard-weight">
             <i className="fa-solid fa-copyright sec-font-clr standard-fz"></i>{" "}
             {date.getFullYear()}, MzansiRides, All rights reserved.
