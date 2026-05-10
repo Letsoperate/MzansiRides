@@ -120,7 +120,7 @@ export default function Reserve() {
     const paystack = new PaystackPop();
     const totalPrice = parseInt(priceRef.current.innerText.replace("R", ""));
     paystack.newTransaction({
-      key: "pk_test_58230b22a04e8e07ee9d616fa22b26a450e852ec",
+      key: "pk_test_51feaff4a12e482f6d6f9518147935823c73d0d8",
       amount: totalPrice * 100,
       email: emailRef.current.value,
       firstName: nameRef.current.value,
