@@ -16,11 +16,11 @@ public class CarService {
     }
 
     public List<Car> getAllCars() {
-        return carRepository.findAll();
+        return carRepository.findAllSorted();
     }
 
     public List<Car> getCarsByCategory(String category) {
-        return carRepository.findByCategory(category);
+        return carRepository.findByCategorySorted(category);
     }
 
     public List<Car> getAvailableCars() {
