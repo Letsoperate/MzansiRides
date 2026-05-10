@@ -1,0 +1,78 @@
+# Name of your application. Used to uniquely configure containers.
+service: mzansirides
+
+# Name of the container image.
+image: letsoperate/mzansirides
+
+# Deploy to these servers.
+servers:
+  web:
+    hosts:
+      - 13.63.19.64
+
+# Enable SSL auto certification via Let's Encrypt.
+proxy:
+  ssl: true
+  host: mzansirides.13.63.19.64.nip.io
+  app_port: 4000
+
+# GitHub Container Registry (free)
+registry:
+  server: ghcr.io
+  username: Letsoperate
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+# Inject environment variables into containers.
+env:
+  clear:
+    SPRING_PROFILES_ACTIVE: prod
+    SPRING_DATASOURCE_URL: jdbc:postgresql://mzansirides-db:5432/mzansirides
+    SPRING_DATASOURCE_USERNAME: mzansirides
+    SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
+    SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    SPRING_SERVLET_MULTIPART_MAX_FILE_SIZE: 10MB
+    SPRING_SERVLET_MULTIPART_MAX_REQUEST_SIZE: 10MB
+    ADMIN_JWT_EXPIRATION: "28800000"
+  secret:
+    - ADMIN_JWT_SECRET
+    - SPRING_DATASOURCE_PASSWORD
+    - MAIL_USERNAME
+    - MAIL_PASSWORD
+    - MAIL_FROM
+
+# Persistent uploads volume
+volumes:
+  - "mzansirides_uploads:/app/uploads/cars"
+
+# Builder configuration
+builder:
+  arch: amd64
+  driver: docker
+  cache:
+    type: registry
+    options: mode=max
+    image: letsoperate/mzansirides-build-cache
+
+# SSH configuration for AWS EC2
+ssh:
+  user: ubuntu
+  keys_only: true
+  keys:
+    - /home/ntoampi/Documents/Slade_Deploy_VM/Slade_Deploy_VM.pem
+
+# Accessory: PostgreSQL database
+accessories:
+  db:
+    image: postgres:16-alpine
+    host: 13.63.19.64
+    port: 5432
+    env:
+      clear:
+        POSTGRES_USER: mzansirides
+        POSTGRES_DB: mzansirides
+        POSTGRES_HOST_AUTH_METHOD: scram-sha-256
+      secret:
+        - POSTGRES_PASSWORD
+    directories:
+      - data:/var/lib/postgresql/data

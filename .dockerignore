@@ -1,0 +1,11 @@
+node_modules
+dist
+.env
+.env.kamal
+.env.example
+*.log
+.git
+.gitignore
+.kamal/hooks/*.sample
+backend/target
+uploads

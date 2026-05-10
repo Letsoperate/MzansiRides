@@ -14,6 +14,7 @@ dist-ssr
 
 # Environment
 .env
+.env.kamal
 
 # Uploaded files
 uploads/
