@@ -8,28 +8,35 @@ export default function Testimonial() {
   const testimonialData = [
     {
       id: 1,
-      name: "Pete Daniels",
+      name: "Neezy Shai",
       position: "Client",
       testimony:
-        "We rented a car from this website to go camping in the outskirts of town, the process was very easy and we really enjoyed the ride.",
-      customerImg:
-        "https://ik.imagekit.io/zusxqcpbw/tr:w-200/user1.jpg?updatedAt=1694598983137",
+        "MzansiRides made my trip to Durban unforgettable. The car was spotless, fuel-efficient, and the booking process was smoother than I ever imagined.",
+      customerImg: "https://ui-avatars.com/api/?name=Neezy+Shai&size=200&background=e94560&color=fff&bold=true",
     },
     {
       id: 2,
-      name: "David Levington",
+      name: "Evans Sekgota",
       position: "Client",
       testimony:
-        "A friend introduced me to this website and just when I needed a card to ride to an occassion, I got it really fast and easy.",
-      customerImg: clientTwo,
+        "I needed a car urgently for a family event and MzansiRides delivered within hours. Professional service and very affordable rates. Highly recommended!",
+      customerImg: "https://ui-avatars.com/api/?name=Evans+Sekgota&size=200&background=0f3460&color=fff&bold=true",
     },
     {
       id: 3,
-      name: "Anna Stones",
+      name: "Lucky Sekgota",
       position: "Client",
       testimony:
-        "This website is unbelievably reliable, the drive was smooth, the car wasn't even faulty at all and the prices were affordable.",
-      customerImg: clientThree,
+        "Best car rental experience in South Africa! The Toyota Hilux I rented handled the rural roads perfectly. Will definitely use MzansiRides again.",
+      customerImg: "https://ui-avatars.com/api/?name=Lucky+Sekgota&size=200&background=16213e&color=fff&bold=true",
+    },
+    {
+      id: 4,
+      name: "Cathness Ntoampi",
+      position: "Client",
+      testimony:
+        "As a frequent traveler, I've tried many rental services but MzansiRides stands out. Their customer care team went above and beyond for me.",
+      customerImg: "https://ui-avatars.com/api/?name=Cathness+Ntoampi&size=200&background=1a1a2e&color=fff&bold=true",
     },
   ];
 

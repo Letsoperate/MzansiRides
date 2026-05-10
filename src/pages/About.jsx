@@ -23,24 +23,57 @@ export default function About() {
   const teamData = [
     {
       id: 1,
-      imgSrc:
-        "https://ik.imagekit.io/zusxqcpbw/tr:w-400/team1.avif?updatedAt=1694600057681",
-      teamName: "Lerato Mokoena",
-      teamPosition: "Fleet Operations Lead",
+      imgSrc: "https://ui-avatars.com/api/?name=Lintshiwe+Ntoampi&size=400&background=e94560&color=fff&bold=true",
+      teamName: "Lintshiwe Pontsho Ntoampi",
+      teamPosition: "Founder & CEO",
     },
     {
       id: 2,
-      imgSrc:
-        "https://ik.imagekit.io/zusxqcpbw/tr:w-400/team2.avif?updatedAt=1694600057523",
-      teamName: "Siyabonga Khumalo",
-      teamPosition: "Customer Success Manager",
+      imgSrc: "https://ui-avatars.com/api/?name=Zandile+Sosiba&size=400&background=0f3460&color=fff&bold=true",
+      teamName: "Zandile Sosiba",
+      teamPosition: "Operations Manager",
     },
     {
       id: 3,
-      imgSrc:
-        "https://ik.imagekit.io/zusxqcpbw/tr:w-400/team3.avif?updatedAt=1694600057617",
-      teamName: "Naledi Petersen",
-      teamPosition: "Digital Product Engineer",
+      imgSrc: "https://ui-avatars.com/api/?name=Koena+Mbongz&size=400&background=16213e&color=fff&bold=true",
+      teamName: "Koena Mbongz",
+      teamPosition: "Lead Developer",
+    },
+    {
+      id: 4,
+      imgSrc: "https://ui-avatars.com/api/?name=Lesego+LKW&size=400&background=1a1a2e&color=fff&bold=true",
+      teamName: "Lesego Lekwene",
+      teamPosition: "Frontend Engineer",
+    },
+    {
+      id: 5,
+      imgSrc: "https://ui-avatars.com/api/?name=Amanda+Mngadi&size=400&background=e94560&color=fff&bold=true",
+      teamName: "Amanda Mngadi",
+      teamPosition: "UX/UI Designer",
+    },
+    {
+      id: 6,
+      imgSrc: "https://ui-avatars.com/api/?name=Khomi+Vumane&size=400&background=0f3460&color=fff&bold=true",
+      teamName: "Khomanani Mokoena",
+      teamPosition: "Backend Developer",
+    },
+    {
+      id: 7,
+      imgSrc: "https://ui-avatars.com/api/?name=Ayuba+Shabangu&size=400&background=16213e&color=fff&bold=true",
+      teamName: "Ayuba Salimoshabangu",
+      teamPosition: "DevOps Engineer",
+    },
+    {
+      id: 8,
+      imgSrc: "https://ui-avatars.com/api/?name=Thandeka+Shongwe&size=400&background=1a1a2e&color=fff&bold=true",
+      teamName: "Thandeka Shongwe",
+      teamPosition: "Marketing Lead",
+    },
+    {
+      id: 9,
+      imgSrc: "https://ui-avatars.com/api/?name=Falakhe+Shabangu&size=400&background=e94560&color=fff&bold=true",
+      teamName: "Falakhe Shabangu",
+      teamPosition: "Customer Support",
     },
   ];
 
