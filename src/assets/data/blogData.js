@@ -67,7 +67,7 @@ const blogData = [
     ],
     buttonContent: "Read More",
     userName: "Sipho Dlamini",
-    date: "11 Aug, 2023",
+    date: "3 May, 2026",
     time: "9:30pm",
     imgUrl:
       "/uploads/cars/bmw-3-series-luxury.jpg",
@@ -75,7 +75,7 @@ const blogData = [
       {
         id: 1,
         user: "Thabo Mokoena",
-        dateOfReply: "13 Aug, 2023",
+        dateOfReply: "4 May, 2026",
         timeOfReply: "10:33am",
         reply: "This was really helpful, just the content I was looking for!",
         pfp: avatar("Thabo Mokoena"),
@@ -83,7 +83,7 @@ const blogData = [
       {
         id: 2,
         user: "Pieter van der Merwe",
-        dateOfReply: "13 Aug, 2023",
+        dateOfReply: "5 May, 2026",
         timeOfReply: "9:45pm",
         reply: "👍👍👍",
         pfp: avatar("Pieter van der Merwe"),
@@ -159,7 +159,7 @@ const blogData = [
     ],
     buttonContent: "Read More",
     userName: "Precious Mahlangu",
-    date: "13 Feb, 2023",
+    date: "14 Feb, 2026",
     time: "10:44am",
     imgUrl:
       "/uploads/cars/ford-everest-suv.jpg",
@@ -167,7 +167,7 @@ const blogData = [
       {
         id: 1,
         user: "Bongani Nkosi",
-        dateOfReply: "23 Feb, 2023",
+        dateOfReply: "15 Feb, 2026",
         timeOfReply: "1:20pm",
         reply: "Nice, I've learnt a lot from this",
         pfp: avatar("Bongani Nkosi"),
@@ -175,7 +175,7 @@ const blogData = [
       {
         id: 2,
         user: "Johan du Plessis",
-        dateOfReply: "13 Aug, 2023",
+        dateOfReply: "16 Feb, 2026",
         timeOfReply: "3:46pm",
         reply: "I encountered an issue and this solved my problem",
         pfp: avatar("Johan du Plessis"),
@@ -183,7 +183,7 @@ const blogData = [
       {
         id: 3,
         user: "Lerato Molefe",
-        dateOfReply: "14 Aug, 2023",
+        dateOfReply: "17 Feb, 2026",
         timeOfReply: "7:44am",
         reply: "Amazing!",
         pfp: avatar("Lerato Molefe"),
@@ -191,7 +191,7 @@ const blogData = [
       {
         id: 4,
         user: "Naledi Khumalo",
-        dateOfReply: "14 Aug, 2023",
+        dateOfReply: "18 Feb, 2026",
         timeOfReply: "8:44am",
         reply: "This is a good piece of information and knowledge",
         pfp: avatar("Naledi Khumalo"),
@@ -276,7 +276,7 @@ const blogData = [
     ],
     buttonContent: "Read More",
     userName: "Michael Motloung",
-    date: "11 Mar, 2023",
+    date: "22 Mar, 2026",
     time: "5:23pm",
     imgUrl:
       "/uploads/cars/audi-a4-luxury.jpg",
@@ -284,7 +284,7 @@ const blogData = [
       {
         id: 1,
         user: "Thato Ramaphosa",
-        dateOfReply: "23 Feb, 2023",
+        dateOfReply: "23 Mar, 2026",
         timeOfReply: "1:20pm",
         reply: "This is a rich content, thanks for this",
         pfp: avatar("Thato Ramaphosa"),
@@ -292,7 +292,7 @@ const blogData = [
       {
         id: 2,
         user: "Zanele Buthelezi",
-        dateOfReply: "13 Aug, 2023",
+        dateOfReply: "24 Mar, 2026",
         timeOfReply: "3:46pm",
         reply: "Cool stuff, just what I needed",
         pfp: avatar("Zanele Buthelezi"),
