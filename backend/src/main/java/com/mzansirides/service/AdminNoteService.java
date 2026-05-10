@@ -26,7 +26,7 @@ public class AdminNoteService {
                 "createdAt", n.getCreatedAt().toString()
             ));
         }
-        return Map.of("note", (Object) null);
+        return Map.of("note", "No notes yet");
     }
 
     public Map<String, Object> saveNote(String noteText) {

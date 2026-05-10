@@ -2,6 +2,8 @@ package com.mzansirides.service;
 
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -12,13 +14,16 @@ import java.io.UnsupportedEncodingException;
 @Service
 public class EmailService {
 
+    private static final Logger log = LoggerFactory.getLogger(EmailService.class);
+
     private final JavaMailSender mailSender;
     private final String fromAddress;
 
-    public EmailService(@org.springframework.beans.factory.annotation.Autowired(required = false) JavaMailSender mailSender,
+    public EmailService(JavaMailSender mailSender,
                         @Value("${mail.from:no-reply@mzansirides.co.za}") String fromAddress) {
         this.mailSender = mailSender;
         this.fromAddress = fromAddress;
+        log.info("EmailService initialized with from address: {}", fromAddress);
     }
 
     public void sendVerificationEmail(String to, String fullName, String token) {
@@ -239,7 +244,6 @@ public class EmailService {
 
     private void sendEmail(String to, String subject, String body) {
         try {
-            if (mailSender == null) return;
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
             helper.setFrom(new InternetAddress(fromAddress, "MzansiRides"));
@@ -249,7 +253,7 @@ public class EmailService {
             helper.setText(body, true);
             mailSender.send(message);
         } catch (Exception e) {
-            System.err.println("[Email] Failed to send '" + subject + "' to " + to + ": " + e.getMessage());
+            log.error("[Email] Failed to send '{}' to {}: {}", subject, to, e.getMessage(), e);
         }
     }
 }
