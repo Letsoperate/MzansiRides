@@ -49,10 +49,6 @@ volumes:
 builder:
   arch: amd64
   driver: docker
-  cache:
-    type: registry
-    options: mode=max
-    image: letsoperate/mzansirides-build-cache
 
 # SSH configuration for AWS EC2
 ssh:
