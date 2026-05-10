@@ -32,8 +32,8 @@ public class DataSeeder implements CommandLineRunner {
             Admin a = new Admin(); a.setFullName("Lintshiwe Pontsho Ntoampi");
             a.setEmail("ntoampilp@gmail.com"); a.setPasswordHash(encoder.encode("Mzansi@2026"));
             a.setCreatedAt(LocalDateTime.now()); adminRepo.save(a);
-            Admin b = new Admin(); b.setFullName("MzansiRides Super Admin");
-            b.setEmail("admin@mzansirides.co.za"); b.setPasswordHash(encoder.encode("Mzansi@2026"));
+            Admin b = new Admin(); b.setFullName("MzansiRides Admin");
+            b.setEmail("ntoampilp@gmail.com"); b.setPasswordHash(encoder.encode("Mzansi@2026"));
             b.setCreatedAt(LocalDateTime.now()); adminRepo.save(b);
         }
 
