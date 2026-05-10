@@ -1,33 +1,38 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../styles/admin.css";
+import SectionHeader from "../components/UI/SectionHeader";
+import { ToggleContext } from "../App";
+import "../styles/signin.css";
 import { apiRequest, hasAdminSession, setAdminSession } from "../utils/adminApi";
+import { useContext } from "react";
 
 export default function AdminLogin() {
+  const { setDisplayHeader } = useContext(ToggleContext);
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const [isOnView, setIsOnView] = useState(false);
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setDisplayHeader(false);
     document.title = "MzansiRides - Admin Login";
+    if (hasAdminSession()) navigate("/admin/dashboard", { replace: true });
+  }, [navigate, setDisplayHeader]);
 
-    if (hasAdminSession()) {
-      navigate("/admin/dashboard", { replace: true });
-    }
-  }, [navigate]);
+  function togglePasswordView() {
+    setIsOnView((prev) => !prev);
+  }
 
   async function handleAdminLogin(e) {
     e.preventDefault();
     setError("");
 
-    if (email.trim() === "" || password.trim() === "") {
-      setError("Please enter your admin email and password.");
-      return;
-    }
+    const email = emailRef.current.value.trim();
+    const password = passwordRef.current.value;
+    if (!email || !password) { setError("Please enter admin email and password."); return; }
 
     try {
       setIsSubmitting(true);
@@ -35,7 +40,6 @@ export default function AdminLogin() {
         method: "POST",
         body: JSON.stringify({ email, password }),
       });
-
       setAdminSession(payload.token, payload.admin);
       navigate("/admin/dashboard");
     } catch (requestError) {
@@ -46,103 +50,35 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="admin-login-page">
-      <div className="admin-login-bg">
-        <div className="admin-login-shape admin-login-shape-1"></div>
-        <div className="admin-login-shape admin-login-shape-2"></div>
-      </div>
-
-      <section className="admin-login-wrapper">
-        <div className="admin-login-card shadow">
-          <div className="admin-login-header">
-            <div className="admin-login-brand">
-              <span className="admin-login-brand-icon">
-                <i className="fa-solid fa-car"></i>
-              </span>
-              <div>
-                <h1 className="admin-login-logo-text">MzansiRides</h1>
-                <p className="admin-login-tagline">Drive Mzansi, Your Way</p>
-              </div>
-            </div>
-            <div className="admin-login-badge">
-              <i className="fa-solid fa-shield-halved"></i> Admin Portal
-            </div>
-          </div>
-
-          <div className="admin-login-divider"></div>
-
-          <h2 className="admin-login-title">Welcome Back</h2>
-          <p className="admin-login-subtitle">
-            Sign in to manage your fleet, bookings, drivers, and operations.
-          </p>
-
-          <form onSubmit={handleAdminLogin} className="admin-login-form">
-            <div className="admin-login-field">
-              <label className="admin-login-label">
-                <i className="fa-solid fa-envelope"></i> Email Address
-              </label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your admin email"
-                autoComplete="email"
-              />
-            </div>
-
-            <div className="admin-login-field">
-              <label className="admin-login-label">
-                <i className="fa-solid fa-lock"></i> Password
-              </label>
-              <div className="admin-login-password-wrap">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your password"
-                  autoComplete="current-password"
-                />
-                <button
-                  type="button"
-                  className="admin-login-password-toggle"
-                  onClick={() => setShowPassword(!showPassword)}
-                  tabIndex={-1}
-                >
-                  <i className={`fa-solid fa-${showPassword ? "eye-slash" : "eye"}`}></i>
-                </button>
-              </div>
-            </div>
-
-            {error && (
-              <div className="admin-login-error">
-                <i className="fa-solid fa-circle-exclamation"></i> {error}
-              </div>
-            )}
-
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="admin-login-submit transition"
-            >
-              {isSubmitting ? (
-                <>
-                  <i className="fa-solid fa-spinner fa-spin"></i> Signing in...
-                </>
-              ) : (
-                <>
-                  <i className="fa-solid fa-right-to-bracket"></i> Access Dashboard
-                </>
-              )}
-            </button>
-          </form>
-
-          <div className="admin-login-footer">
-            <Link to="/home" className="admin-login-back-link transition">
-              <i className="fa-solid fa-arrow-left"></i> Back to website
-            </Link>
-          </div>
+    <div>
+      <SectionHeader title="ADMIN LOGIN" />
+      <form onSubmit={handleAdminLogin} className="signin-form constant-margin sec-bg">
+        <p className="standard-fz header-margin align sec-font sec-font-clr" data-aos="fade">
+          Admin Portal Sign In
+        </p>
+        <div className="form-wrapper">
+          <input ref={emailRef} required type="email" placeholder="Enter admin email" />
         </div>
-      </section>
+        <div className="form-wrapper password-div">
+          <input ref={passwordRef} required type={isOnView ? "text" : "password"} placeholder="Enter password" />
+          <i onClick={togglePasswordView} className={`fa-solid fa-${isOnView ? "eye-slash" : "eye"} sec-font-clr2 standard-fz`}></i>
+        </div>
+
+        {error && (
+          <div className="min-font" style={{ color: "#e94560", margin: "0.5em 0", lineHeight: "1.5" }}>
+            {error}
+          </div>
+        )}
+
+        <button type="submit" disabled={isSubmitting} className="pri-bg transition standard-weight header-margin">
+          {isSubmitting ? "Signing in..." : "Sign In"}
+        </button>
+        <Link style={{ textDecoration: "none" }} to="/home">
+          <p className="min-fz sec-font-clr2 sub-header-margin standard-weight align">
+            <i className="fa-solid fa-arrow-left"></i> Back to website
+          </p>
+        </Link>
+      </form>
     </div>
   );
 }
