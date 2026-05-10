@@ -12,9 +12,11 @@ servers:
 
 # Enable SSL auto certification via Let's Encrypt.
 proxy:
-  ssl: false
+  ssl: true
   host: mzansirides.13.63.19.64.nip.io
   app_port: 4000
+  healthcheck:
+    path: /api/health
 
 # GitHub Container Registry (free)
 registry:

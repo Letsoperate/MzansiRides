@@ -25,4 +25,6 @@ COPY --from=backend-build /app/target/*.jar app.jar
 RUN chown -R appuser:appgroup /app
 USER appuser
 EXPOSE 4000
+HEALTHCHECK --interval=10s --timeout=5s --start-period=20s --retries=3 \
+    CMD curl -f http://localhost:4000/api/health || exit 1
 CMD ["java", "-jar", "app.jar"]
