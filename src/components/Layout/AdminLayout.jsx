@@ -59,16 +59,6 @@ export default function AdminLayout() {
           onClick={() => setMobileNav(!mobileNav)}
           className="transition admin-mobile-toggle"
           style={{
-            display: "none",
-            background: "none",
-            border: "1px solid rgba(233,69,96,0.3)",
-            color: "#fff",
-            fontSize: "1.2rem",
-            padding: "0.3em 0.6em",
-            borderRadius: "6px",
-            cursor: "pointer",
-          }}
-        >
           <i className={`fa-solid ${mobileNav ? "fa-xmark" : "fa-bars"}`}></i>
         </button>
 
