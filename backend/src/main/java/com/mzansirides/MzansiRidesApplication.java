@@ -9,3 +9,4 @@ public class MzansiRidesApplication {
         SpringApplication.run(MzansiRidesApplication.class, args);
     }
 }
+
