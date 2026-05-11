@@ -18,17 +18,20 @@ public class EmailService {
 
     private final JavaMailSender mailSender;
     private final String fromAddress;
+    private final String siteUrl;
 
     public EmailService(JavaMailSender mailSender,
-                        @Value("${mail.from:no-reply@mzansirides.co.za}") String fromAddress) {
+                        @Value("${mail.from:no-reply@mzansirides.co.za}") String fromAddress,
+                        @Value("${site.url:" + siteUrl + "}") String siteUrl) {
         this.mailSender = mailSender;
         this.fromAddress = fromAddress;
-        log.info("EmailService initialized with from address: {}", fromAddress);
+        this.siteUrl = siteUrl;
+        log.info("EmailService initialized with from address: {}, site URL: {}", fromAddress, siteUrl);
     }
 
     public void sendVerificationEmail(String to, String fullName, String token) {
         String subject = "MzansiRides - Verify Your Email Address";
-        String link = "http://localhost:5173/verify-email?token=" + token;
+        String link = siteUrl + "/verify-email?token=" + token;
         String body = buildEmailTemplate("Verify Your Email",
                 "Welcome to MzansiRides, " + fullName + "!",
                 "Thanks for signing up. Please verify your email to start booking rides.",
@@ -39,7 +42,7 @@ public class EmailService {
 
     public void sendPasswordResetEmail(String to, String fullName, String token) {
         String subject = "MzansiRides - Reset Your Password";
-        String link = "http://localhost:5173/reset-password?token=" + token;
+        String link = "" + siteUrl + "/reset-password?token=" + token;
         String body = buildEmailTemplate("Reset Your Password",
                 "Hi " + fullName + ",",
                 "You requested to reset your password. Click the button below to create a new password.",
@@ -133,7 +136,7 @@ public class EmailService {
         String body = buildEmailTemplate("Welcome Aboard!",
                 "Hi " + fullName + ",",
                 "Your MzansiRides account has been created successfully. Start browsing our fleet and book your next ride.",
-                "Browse Cars", "http://localhost:5173/cars/All",
+                "Browse Cars", "" + siteUrl + "/cars/All",
                 "Drive safe, MzansiRides Team");
         sendHtml(to, subject, body);
     }
@@ -143,7 +146,7 @@ public class EmailService {
         String body = buildEmailTemplate("Registration Successful",
                 "Welcome to MzansiRides, " + fullName + "!",
                 "Your account is now active. Please check your inbox for a verification email.",
-                "Go to MzansiRides", "http://localhost:5173/home",
+                "Go to MzansiRides", "" + siteUrl + "/home",
                 "Thank you for joining MzansiRides!");
         sendHtml(to, subject, body);
     }
@@ -153,7 +156,7 @@ public class EmailService {
         String body = buildEmailTemplate("Application Received",
                 "Hi " + fullName + ",",
                 "Thank you for applying to become a driver with MzansiRides. Our team will review your application and get back to you within 3-5 business days.",
-                "Visit MzansiRides", "http://localhost:5173/home",
+                "Visit MzansiRides", "" + siteUrl + "/home",
                 "We look forward to having you on our team!");
         sendHtml(to, subject, body);
     }
@@ -163,7 +166,7 @@ public class EmailService {
         String body = buildEmailTemplate("Congratulations!",
                 "Hi " + fullName + ",",
                 "Great news! Your driver application has been approved. Welcome to the MzansiRides fleet.",
-                "Login to Dashboard", "http://localhost:5173/sign-in",
+                "Login to Dashboard", "" + siteUrl + "/sign-in",
                 "Welcome aboard, MzansiRides Team");
         sendHtml(to, subject, body);
     }
@@ -224,7 +227,7 @@ public class EmailService {
             <tr><td style="color:#a0a0b0;font-size:13px;font-weight:600;padding:10px 16px">Checkout Date</td><td style="color:#e0e0e0;font-size:14px;padding:10px 16px">%s</td></tr>
             </table>
             <table cellpadding="0" cellspacing="0" style="margin-top:24px"><tr><td align="center" style="background-color:#e94560;border-radius:8px">
-            <a href="http://localhost:5173/home" style="display:inline-block;padding:14px 36px;color:#ffffff;text-decoration:none;font-size:15px;font-weight:700">View Booking</a>
+            <a href="" + siteUrl + "/home" style="display:inline-block;padding:14px 36px;color:#ffffff;text-decoration:none;font-size:15px;font-weight:700">View Booking</a>
             </td></tr></table>
             </td></tr>
             <tr><td style="background-color:#0f3460;padding:20px 40px;text-align:center">

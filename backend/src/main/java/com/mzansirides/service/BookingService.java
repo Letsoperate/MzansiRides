@@ -2,6 +2,8 @@ package com.mzansirides.service;
 
 import com.mzansirides.model.Booking;
 import com.mzansirides.repository.BookingRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -11,6 +13,8 @@ import java.util.*;
 
 @Service
 public class BookingService {
+
+    private static final Logger log = LoggerFactory.getLogger(BookingService.class);
 
     private final BookingRepository repo;
     private final EmailService emailService;
@@ -31,7 +35,11 @@ public class BookingService {
         b = repo.save(b);
 
         if (b.getEmail() != null && !b.getEmail().isBlank()) {
-            try { emailService.sendBookingReceived(b.getEmail(), b.getCustomerName(), b.getCarName()); } catch (Exception ignored) {}
+            try {
+                emailService.sendBookingReceived(b.getEmail(), b.getCustomerName(), b.getCarName());
+            } catch (Exception e) {
+                log.error("Failed to send booking received email to {}", b.getEmail(), e);
+            }
         }
         return b;
     }
@@ -44,11 +52,21 @@ public class BookingService {
         b = repo.save(b);
 
         if (b.getEmail() != null && !b.getEmail().isBlank()) {
-            String paymentLink = "http://localhost:5173/payment/" + b.getBookingToken();
+            String baseUrl = "https://mzansirides.13.63.19.64.nip.io";
+            String paymentLink = baseUrl + "/payment/" + b.getBookingToken();
+            try {
+                emailService.sendBookingConfirmation(b.getEmail(), b.getCustomerName(),
+                        b.getCarName(), b.getCity(),
+                        b.getCheckoutDate() != null ? b.getCheckoutDate().toString() : "TBC");
+            } catch (Exception e) {
+                log.error("Failed to send booking confirmation email to {}", b.getEmail(), e);
+            }
             try {
                 emailService.sendPaymentLink(b.getEmail(), b.getCustomerName(),
                         b.getCarName(), b.getPaymentAmount() != null ? b.getPaymentAmount() : 0, paymentLink);
-            } catch (Exception ignored) {}
+            } catch (Exception e) {
+                log.error("Failed to send payment link email to {}", b.getEmail(), e);
+            }
         }
         return b;
     }
@@ -67,7 +85,9 @@ public class BookingService {
             try {
                 emailService.sendReceipt(b.getEmail(), b.getCustomerName(), b.getCarName(),
                         b.getReceiptNumber(), amount, payRef, b.getCheckoutDate() != null ? b.getCheckoutDate().toString() : "");
-            } catch (Exception ignored) {}
+            } catch (Exception e) {
+                log.error("Failed to send receipt email to {}", b.getEmail(), e);
+            }
         }
         return b;
     }

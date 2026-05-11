@@ -1,15 +1,36 @@
-/* ====== Admin Top Nav ====== */
+/* ====== Admin Layout ====== */
 .admin-layout {
   min-height: 100vh;
-  background: hsl(210, 6%, 11%);
+  position: relative;
+  background: linear-gradient(135deg, #0f0c29, #1a1a2e 40%, #16213e 70%, #0f3460);
   font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+.admin-layout::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: 
+    url('/uploads/cars/mercedes-c-class.jpg') no-repeat center/cover,
+    url('/uploads/cars/bmw-x5.jpg') no-repeat top right/40%,
+    url('/uploads/cars/audi-a4-luxury.jpg') no-repeat bottom left/35%;
+  background-blend-mode: overlay;
+  filter: blur(4px) brightness(0.15);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.admin-layout > * {
+  position: relative;
+  z-index: 1;
 }
 
 .admin-topbar {
   display: flex;
   align-items: center;
-  background: hsl(210, 8%, 8%);
-  border-bottom: 2px solid hsl(141, 30%, 20%);
+  background: rgba(15, 15, 35, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(233,69,96,0.2);
   padding: 0 1.5rem;
   position: sticky;
   top: 0;
@@ -36,8 +57,8 @@
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: hsl(141, 35%, 55%);
-  background: hsla(141, 35%, 20%, 0.4);
+  color: #e94560;
+  background: rgba(233,69,96,0.15);
   padding: 0.2em 0.6em;
   border-radius: 4px;
 }
@@ -45,7 +66,7 @@
 .admin-nav-toggle {
   display: none;
   background: none;
-  border: 1px solid hsl(141, 25%, 25%);
+  border: 1px solid hsl(347, 25%, 25%);
   color: #fff;
   font-size: 1.2rem;
   padding: 0.4em 0.7em;
@@ -66,7 +87,7 @@
   align-items: center;
   gap: 0.45rem;
   padding: 0.5em 1em;
-  color: hsl(141, 20%, 65%);
+  color: #8892b0;
   text-decoration: none;
   font-size: 0.85rem;
   font-weight: 500;
@@ -79,18 +100,18 @@
 
 .admin-topnav-link i { font-size: 0.8rem; width: 16px; text-align: center; }
 
-.admin-topnav-link:hover { background: hsla(141, 30%, 20%, 0.3); color: hsl(141, 40%, 85%); }
+.admin-topnav-link:hover { background: rgba(233,69,96,0.1); color: #fff; }
 
 .admin-topnav-link.active {
-  background: hsla(141, 40%, 25%, 0.5);
-  color: hsl(141, 55%, 65%);
+  background: rgba(233,69,96,0.15);
+  color: #e94560;
   font-weight: 600;
 }
 
 .admin-topnav-spacer { flex: 1; }
 
 .admin-logout-link { background: none; }
-.admin-logout-link:hover { background: hsla(0, 60%, 30%, 0.3); color: hsl(0, 60%, 70%); }
+.admin-logout-link:hover { background: rgba(233,69,96,0.15); color: #e94560; }
 
 .admin-nav-overlay { display: none; }
 
@@ -107,7 +128,7 @@
 .admin-loading {
   text-align: center;
   padding: 3rem;
-  color: hsl(141, 25%, 60%);
+  color: hsl(347, 25%, 60%);
   font-size: 0.95rem;
 }
 
@@ -144,7 +165,7 @@
 
 .admin-stat-card {
   background: hsl(210, 8%, 13%);
-  border: 1px solid hsl(141, 15%, 18%);
+  border: 1px solid hsl(347, 15%, 18%);
   border-radius: 8px;
   padding: 1.2rem;
   text-align: center;
@@ -153,13 +174,13 @@
 .admin-stat-value {
   font-size: 2rem;
   font-weight: 700;
-  color: hsl(141, 50%, 55%);
+  color: hsl(347, 50%, 55%);
   margin: 0;
 }
 
 .admin-stat-label {
   font-size: 0.8rem;
-  color: hsl(141, 15%, 50%);
+  color: hsl(347, 15%, 50%);
   margin: 0.25rem 0 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -167,7 +188,7 @@
 
 .admin-card2 {
   background: hsl(210, 8%, 13%);
-  border: 1px solid hsl(141, 15%, 18%);
+  border: 1px solid hsl(347, 15%, 18%);
   border-radius: 8px;
   padding: 1.2rem;
   margin-bottom: 1rem;
@@ -181,13 +202,13 @@
 }
 
 .admin-card2-list p {
-  color: hsl(141, 15%, 65%);
+  color: hsl(347, 15%, 65%);
   font-size: 0.88rem;
   margin: 0.3rem 0;
 }
 
 .admin-card2-list strong {
-  color: hsl(141, 40%, 65%);
+  color: hsl(347, 40%, 65%);
 }
 
 .admin-checklist { display: flex; flex-direction: column; gap: 0.4rem; }
@@ -196,14 +217,14 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: hsl(141, 15%, 65%);
+  color: hsl(347, 15%, 65%);
   font-size: 0.85rem;
   cursor: pointer;
 }
 
-.admin-check-item input { accent-color: hsl(141, 45%, 45%); }
+.admin-check-item input { accent-color: hsl(347, 45%, 45%); }
 
-.admin-muted { color: hsl(141, 15%, 55%); font-size: 0.85rem; }
+.admin-muted { color: hsl(347, 15%, 55%); font-size: 0.85rem; }
 
 /* ====== Buttons ====== */
 .admin-btn {
@@ -218,19 +239,19 @@
   border: 1px solid transparent;
   transition: all 0.15s;
   background: hsl(210, 8%, 18%);
-  color: hsl(141, 20%, 70%);
-  border-color: hsl(141, 15%, 22%);
+  color: hsl(347, 20%, 70%);
+  border-color: hsl(347, 15%, 22%);
 }
 
 .admin-btn:hover { background: hsl(210, 8%, 22%); }
 
 .admin-btn.primary {
-  background: hsl(141, 40%, 25%);
-  border-color: hsl(141, 40%, 35%);
+  background: hsl(347, 40%, 25%);
+  border-color: hsl(347, 40%, 35%);
   color: #fff;
 }
 
-.admin-btn.primary:hover { background: hsl(141, 40%, 30%); }
+.admin-btn.primary:hover { background: hsl(347, 40%, 30%); }
 
 .admin-btn.secondary {
   background: hsl(210, 6%, 18%);
@@ -241,7 +262,7 @@
 .admin-btn.danger { background: hsl(0, 35%, 18%); border-color: hsl(0, 35%, 28%); color: hsl(0, 50%, 65%); }
 .admin-btn.danger:hover { background: hsl(0, 35%, 22%); }
 
-.admin-btn.success { background: hsl(141, 30%, 16%); border-color: hsl(141, 30%, 26%); color: hsl(141, 40%, 65%); }
+.admin-btn.success { background: hsl(347, 30%, 16%); border-color: hsl(347, 30%, 26%); color: hsl(347, 40%, 65%); }
 
 .admin-btn.sm { padding: 0.3em 0.7em; font-size: 0.78rem; }
 .admin-btn:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -255,12 +276,12 @@
   text-align: left;
   padding: 0.6em 0.8em;
   background: hsl(210, 8%, 10%);
-  color: hsl(141, 20%, 55%);
+  color: hsl(347, 20%, 55%);
   font-weight: 600;
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  border-bottom: 2px solid hsl(141, 20%, 18%);
+  border-bottom: 2px solid hsl(347, 20%, 18%);
 }
 
 .admin-table td {
@@ -270,7 +291,7 @@
   vertical-align: middle;
 }
 
-.admin-table tr:hover td { background: hsla(141, 20%, 15%, 0.1); }
+.admin-table tr:hover td { background: hsla(347, 20%, 15%, 0.1); }
 
 .admin-table-img {
   width: 48px;
@@ -292,11 +313,11 @@
   text-transform: capitalize;
 }
 
-.badge.available, .badge.active { background: hsla(141, 45%, 30%, 0.3); color: hsl(141, 40%, 60%); }
+.badge.available, .badge.active { background: hsla(347, 45%, 30%, 0.3); color: hsl(347, 40%, 60%); }
 .badge.pending { background: hsla(35, 75%, 45%, 0.2); color: hsl(35, 70%, 60%); }
 .badge.booked, .badge.open { background: hsla(205, 60%, 45%, 0.2); color: hsl(205, 55%, 60%); }
 .badge.maintenance, .badge.rejected, .badge.cancelled { background: hsla(0, 45%, 35%, 0.2); color: hsl(0, 45%, 55%); }
-.badge.completed, .badge.approved, .badge.resolved { background: hsla(141, 35%, 30%, 0.3); color: hsl(141, 35%, 55%); }
+.badge.completed, .badge.approved, .badge.resolved { background: hsla(347, 35%, 30%, 0.3); color: hsl(347, 35%, 55%); }
 
 /* ====== Modal ====== */
 .admin-modal-overlay {
@@ -305,7 +326,7 @@
 }
 
 .admin-modal {
-  background: hsl(210, 8%, 12%); border: 1px solid hsl(141, 20%, 22%);
+  background: hsl(210, 8%, 12%); border: 1px solid hsl(347, 20%, 22%);
   border-radius: 10px; padding: 1.5rem 1.8rem;
   width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto;
 }
@@ -313,14 +334,14 @@
 .admin-modal h3 { color: #fff; margin: 0 0 1rem; font-size: 1.1rem; }
 
 .admin-field { margin-bottom: 0.9rem; }
-.admin-field label { display: block; color: hsl(141, 15%, 55%); font-size: 0.82rem; margin-bottom: 0.3rem; font-weight: 600; }
+.admin-field label { display: block; color: hsl(347, 15%, 55%); font-size: 0.82rem; margin-bottom: 0.3rem; font-weight: 600; }
 .admin-field input, .admin-field select, .admin-field textarea {
   width: 100%; padding: 0.55em 0.7em; border-radius: 6px;
   border: 1px solid hsl(210, 6%, 22%); background: hsl(210, 6%, 8%);
   color: #fff; font-size: 0.88rem; outline: none; font-family: inherit;
 }
 .admin-field input:focus, .admin-field select:focus, .admin-field textarea:focus {
-  border-color: hsl(141, 35%, 35%); box-shadow: 0 0 0 2px hsla(141, 35%, 35%, 0.2);
+  border-color: hsl(347, 35%, 35%); box-shadow: 0 0 0 2px hsla(347, 35%, 35%, 0.2);
 }
 .admin-field textarea { resize: vertical; }
 .admin-field small { display: block; color: hsl(210, 6%, 40%); font-size: 0.75rem; margin-top: 0.25rem; }
@@ -337,17 +358,17 @@
   font-family: inherit; outline: none;
 }
 
-.admin-success { color: hsl(141, 40%, 50%); font-size: 0.83rem; margin: 0.4rem 0; }
+.admin-success { color: hsl(347, 40%, 50%); font-size: 0.83rem; margin: 0.4rem 0; }
 .admin-error { color: hsl(0, 55%, 55%); font-size: 0.83rem; margin: 0.4rem 0; }
 
 /* ====== Inline Tabs ====== */
 .admin-inline-tabs { display: flex; gap: 0.25rem; margin-bottom: 1rem; }
 .admin-inline-tab {
   padding: 0.45em 1em; border: 1px solid hsl(210, 6%, 22%);
-  background: transparent; color: hsl(141, 15%, 55%); font-size: 0.83rem;
+  background: transparent; color: hsl(347, 15%, 55%); font-size: 0.83rem;
   font-weight: 600; cursor: pointer; border-radius: 6px;
 }
-.admin-inline-tab.active { background: hsl(141, 25%, 18%); border-color: hsl(141, 30%, 30%); color: #fff; }
+.admin-inline-tab.active { background: hsl(347, 25%, 18%); border-color: hsl(347, 30%, 30%); color: #fff; }
 .admin-inline-tab:hover:not(.active) { background: hsl(210, 8%, 15%); }
 
 /* ====== Responsive ====== */
@@ -355,7 +376,7 @@
   .admin-nav-toggle { display: block; }
   .admin-topnav {
     display: none; position: absolute; top: 56px; left: 0; right: 0;
-    background: hsl(210, 10%, 9%); border-bottom: 2px solid hsl(141, 20%, 18%);
+    background: hsl(210, 10%, 9%); border-bottom: 2px solid hsl(347, 20%, 18%);
     flex-direction: column; padding: 0.5rem; gap: 0;
   }
   .admin-topnav.open { display: flex; }
@@ -383,14 +404,14 @@
 
 .fleet-card {
   background: hsl(210, 8%, 13%);
-  border: 1px solid hsl(141, 15%, 18%);
+  border: 1px solid hsl(347, 15%, 18%);
   border-radius: 10px;
   overflow: hidden;
   transition: all 0.2s;
 }
 
 .fleet-card:hover {
-  border-color: hsl(141, 30%, 30%);
+  border-color: hsl(347, 30%, 30%);
   transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(0,0,0,0.3);
 }
@@ -428,7 +449,7 @@
 
 .fleet-category {
   font-size: 0.75rem;
-  color: hsl(141, 20%, 50%);
+  color: hsl(347, 20%, 50%);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin: 0 0 0.5rem;
@@ -437,20 +458,20 @@
 .fleet-price {
   font-size: 1.1rem;
   font-weight: 700;
-  color: hsl(141, 45%, 55%);
+  color: hsl(347, 45%, 55%);
   margin: 0 0 0.5rem;
 }
 
 .fleet-price span {
   font-size: 0.75rem;
   font-weight: 400;
-  color: hsl(141, 20%, 45%);
+  color: hsl(347, 20%, 45%);
   margin-left: 0.15rem;
 }
 
 .fleet-desc {
   font-size: 0.8rem;
-  color: hsl(141, 10%, 45%);
+  color: hsl(347, 10%, 45%);
   line-height: 1.4;
   margin: 0 0 0.8rem;
 }
@@ -469,7 +490,7 @@
 
 .booking-card {
   background: hsl(210, 8%, 13%);
-  border: 1px solid hsl(141, 15%, 18%);
+  border: 1px solid hsl(347, 15%, 18%);
   border-radius: 10px;
   padding: 1rem;
   cursor: pointer;
@@ -477,12 +498,12 @@
 }
 
 .booking-card:hover {
-  border-color: hsl(141, 25%, 28%);
+  border-color: hsl(347, 25%, 28%);
 }
 
 .booking-card.expanded {
-  border-color: hsl(141, 35%, 35%);
-  box-shadow: 0 0 0 1px hsla(141, 35%, 35%, 0.3);
+  border-color: hsl(347, 35%, 35%);
+  box-shadow: 0 0 0 1px hsla(347, 35%, 35%, 0.3);
 }
 
 .booking-card-header {
@@ -495,7 +516,7 @@
 .booking-id {
   font-size: 0.85rem;
   font-weight: 700;
-  color: hsl(141, 35%, 55%);
+  color: hsl(347, 35%, 55%);
 }
 
 .booking-row {
@@ -507,7 +528,7 @@
 
 .booking-row label {
   font-size: 0.75rem;
-  color: hsl(141, 10%, 40%);
+  color: hsl(347, 10%, 40%);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-weight: 500;
@@ -523,7 +544,7 @@
 .booking-detail {
   margin-top: 0.5rem;
   padding-top: 0.5rem;
-  border-top: 1px solid hsl(141, 15%, 18%);
+  border-top: 1px solid hsl(347, 15%, 18%);
 }
 
 .booking-card-actions {
@@ -543,7 +564,7 @@
 
 .driver-card {
   background: hsl(210, 8%, 13%);
-  border: 1px solid hsl(141, 15%, 18%);
+  border: 1px solid hsl(347, 15%, 18%);
   border-radius: 10px;
   padding: 1rem;
   cursor: pointer;
@@ -551,12 +572,12 @@
 }
 
 .driver-card:hover {
-  border-color: hsl(141, 25%, 28%);
+  border-color: hsl(347, 25%, 28%);
 }
 
 .driver-card.expanded {
-  border-color: hsl(141, 35%, 35%);
-  box-shadow: 0 0 0 1px hsla(141, 35%, 35%, 0.3);
+  border-color: hsl(347, 35%, 35%);
+  box-shadow: 0 0 0 1px hsla(347, 35%, 35%, 0.3);
 }
 
 .driver-card-header {
@@ -570,8 +591,8 @@
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background: hsl(141, 30%, 22%);
-  color: hsl(141, 40%, 70%);
+  background: hsl(347, 30%, 22%);
+  color: hsl(347, 40%, 70%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -608,7 +629,7 @@
 .driver-doc-section label {
   display: block;
   font-size: 0.75rem;
-  color: hsl(141, 10%, 40%);
+  color: hsl(347, 10%, 40%);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 0.3rem;
@@ -619,21 +640,21 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  color: hsl(141, 40%, 55%);
+  color: hsl(347, 40%, 55%);
   text-decoration: none;
   font-size: 0.83rem;
   font-weight: 600;
 }
 
 .doc-link:hover {
-  color: hsl(141, 50%, 65%);
+  color: hsl(347, 50%, 65%);
 }
 
 /* ====== Misc ====== */
 .admin-count {
   font-size: 0.7rem;
   font-weight: 400;
-  color: hsl(141, 15%, 40%);
+  color: hsl(347, 15%, 40%);
   margin-left: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -642,7 +663,7 @@
 .admin-empty {
   grid-column: 1 / -1;
   text-align: center;
-  color: hsl(141, 10%, 35%);
+  color: hsl(347, 10%, 35%);
   font-size: 0.9rem;
   padding: 2rem;
 }
@@ -672,7 +693,7 @@
 
 .classic-breadcrumb {
   font-size: 0.72rem;
-  color: hsl(141, 15%, 40%);
+  color: hsl(347, 15%, 40%);
   text-transform: uppercase;
   letter-spacing: 1px;
   margin: 0 0 0.25rem;
@@ -689,7 +710,7 @@
   display: flex;
   gap: 1rem;
   font-size: 0.78rem;
-  color: hsl(141, 15%, 50%);
+  color: hsl(347, 15%, 50%);
   flex-wrap: wrap;
 }
 
@@ -700,10 +721,10 @@
 }
 
 .classic-badge {
-  background: hsl(141, 20%, 15%);
+  background: hsl(347, 20%, 15%);
   padding: 0.3em 0.7em;
   border-radius: 4px;
-  color: hsl(141, 35%, 60%);
+  color: hsl(347, 35%, 60%);
   font-weight: 600;
   font-size: 0.73rem;
 }
@@ -729,7 +750,7 @@
 }
 
 .classic-stat-card:hover {
-  border-color: hsl(141, 20%, 28%);
+  border-color: hsl(347, 20%, 28%);
   background: linear-gradient(180deg, hsl(210, 8%, 16%) 0%, hsl(210, 8%, 13%) 100%);
 }
 
@@ -751,7 +772,7 @@
 
 .classic-stat-label {
   font-size: 0.68rem;
-  color: hsl(141, 12%, 40%);
+  color: hsl(347, 12%, 40%);
   text-transform: uppercase;
   letter-spacing: 1.2px;
   font-weight: 600;
@@ -762,7 +783,7 @@
 .sys-time {
   font-family: "Courier New", Courier, monospace;
   font-size: 0.82rem;
-  color: hsl(141, 25%, 45%);
+  color: hsl(347, 25%, 45%);
   background: hsl(210, 6%, 8%);
   padding: 0.3em 0.8em;
   border: 1px solid hsl(210, 6%, 20%);
@@ -826,12 +847,12 @@
 }
 .sys-row:last-child { border-bottom: none; }
 .sys-row strong { display: block; font-size: 0.83rem; color: #fff; font-weight: 600; }
-.sys-row span { font-size: 0.73rem; color: hsl(141, 10%, 40%); display: block; margin-top: 0.1rem; }
-.sys-empty { color: hsl(141, 8%, 30%); font-size: 0.82rem; text-align: center; padding: 0.8rem; }
+.sys-row span { font-size: 0.73rem; color: hsl(347, 10%, 40%); display: block; margin-top: 0.1rem; }
+.sys-empty { color: hsl(347, 8%, 30%); font-size: 0.82rem; text-align: center; padding: 0.8rem; }
 
 .sys-info {
   font-size: 0.73rem;
-  color: hsl(141, 20%, 45%);
+  color: hsl(347, 20%, 45%);
   display: flex;
   align-items: center;
   gap: 0.3rem;
@@ -863,7 +884,7 @@
   padding: 0.6em 1.2em;
   font-size: 0.82rem;
   font-weight: 700;
-  color: hsl(141, 25%, 55%);
+  color: hsl(347, 25%, 55%);
   text-transform: uppercase;
   letter-spacing: 0.8px;
   border-bottom: 1px solid hsl(210, 6%, 18%);
@@ -894,12 +915,12 @@
 }
 
 .classic-action-btn:hover {
-  background: hsl(141, 15%, 12%);
-  border-color: hsl(141, 25%, 25%);
+  background: hsl(347, 15%, 12%);
+  border-color: hsl(347, 25%, 25%);
 }
 
 .classic-action-btn i {
-  color: hsl(141, 35%, 45%);
+  color: hsl(347, 35%, 45%);
   width: 18px;
   text-align: center;
 }
@@ -920,8 +941,8 @@
 }
 
 .classic-textarea:focus {
-  border-color: hsl(141, 30%, 30%);
-  box-shadow: 0 0 0 2px hsla(141, 30%, 30%, 0.15);
+  border-color: hsl(347, 30%, 30%);
+  box-shadow: 0 0 0 2px hsla(347, 30%, 30%, 0.15);
 }
 
 .classic-btn {
@@ -930,13 +951,13 @@
   font-size: 0.84rem;
   font-weight: 600;
   cursor: pointer;
-  border: 1px solid hsl(141, 30%, 30%);
-  background: hsl(141, 25%, 18%);
+  border: 1px solid hsl(347, 30%, 30%);
+  background: hsl(347, 25%, 18%);
   color: #fff;
   transition: all 0.15s;
 }
 
-.classic-btn:hover { background: hsl(141, 25%, 22%); }
+.classic-btn:hover { background: hsl(347, 25%, 22%); }
 .classic-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
 @media (max-width: 800px) {
@@ -956,7 +977,7 @@
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.6px;
-  color: hsl(141, 12%, 40%);
+  color: hsl(347, 12%, 40%);
 }
 
 .classic-table tr:nth-child(even) td {
@@ -967,9 +988,9 @@
 
 .td-img img { width: 60px; height: 40px; object-fit: cover; border-radius: 4px; }
 .td-name { font-weight: 600; color: #fff; }
-.td-rate { font-weight: 700; color: hsl(141, 40%, 55%); }
+.td-rate { font-weight: 700; color: hsl(347, 40%, 55%); }
 .td-desc { font-size: 0.8rem; color: hsl(210, 6%, 45%); max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.td-id { color: hsl(141, 20%, 40%); font-weight: 600; font-size: 0.8rem; }
+.td-id { color: hsl(347, 20%, 40%); font-weight: 600; font-size: 0.8rem; }
 .td-date { font-size: 0.8rem; color: hsl(210, 6%, 45%); }
 
 .classic-tag {
@@ -978,14 +999,14 @@
   border-radius: 3px;
   background: hsl(210, 6%, 14%);
   border: 1px solid hsl(210, 6%, 22%);
-  color: hsl(141, 15%, 50%);
+  color: hsl(347, 15%, 50%);
   font-size: 0.75rem;
   font-weight: 600;
 }
 
 .classic-btn.primary {
-  background: hsl(141, 30%, 22%);
-  border: 1px solid hsl(141, 30%, 32%);
+  background: hsl(347, 30%, 22%);
+  border: 1px solid hsl(347, 30%, 32%);
   color: #fff;
   padding: 0.55em 1.3em;
   border-radius: 5px;
@@ -994,7 +1015,7 @@
   cursor: pointer;
 }
 
-.classic-btn.primary:hover { background: hsl(141, 30%, 26%); }
+.classic-btn.primary:hover { background: hsl(347, 30%, 26%); }
 
 /* Remove old fleet/booking/driver card styles */
 .fleet-grid, .fleet-card, .fleet-card-img, .fleet-card-body,
@@ -1019,7 +1040,7 @@
 .stats-table th {
   text-align: left; padding: 0.5em 0.8em;
   font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.6px;
-  color: hsl(141, 12%, 35%); border-bottom: 2px solid hsl(210, 6%, 16%);
+  color: hsl(347, 12%, 35%); border-bottom: 2px solid hsl(210, 6%, 16%);
   background: hsl(210, 8%, 9%);
 }
 .stats-table td {
@@ -1027,7 +1048,7 @@
   font-size: 0.85rem; color: hsl(0, 0%, 82%);
 }
 .stats-table td i { width: 18px; text-align: center; }
-.stats-table tr:hover td { background: hsla(141, 10%, 10%, 0.3); }
+.stats-table tr:hover td { background: hsla(347, 10%, 10%, 0.3); }
 .stats-table .sub-row td { opacity: 0.7; }
 
 .mono {
@@ -1036,7 +1057,7 @@
 }
 
 .indicator { font-size: 0.75rem; font-weight: 600; }
-.indicator.green { color: hsl(141, 40%, 50%); }
+.indicator.green { color: hsl(347, 40%, 50%); }
 .indicator.amber { color: hsl(35, 70%, 55%); }
 .indicator.blue { color: hsl(205, 60%, 55%); }
 .indicator.purple { color: hsl(265, 50%, 60%); }
@@ -1048,7 +1069,7 @@
   overflow: hidden; min-width: 60px;
 }
 .bar-fill { height: 100%; border-radius: 2px; transition: width 0.8s ease; min-width: 3px; }
-.bar-fill.green { background: linear-gradient(90deg, hsl(141, 40%, 30%), hsl(141, 50%, 45%)); }
+.bar-fill.green { background: linear-gradient(90deg, hsl(347, 40%, 30%), hsl(347, 50%, 45%)); }
 .bar-fill.amber { background: linear-gradient(90deg, hsl(35, 60%, 35%), hsl(35, 70%, 50%)); }
 .bar-fill.blue { background: linear-gradient(90deg, hsl(205, 50%, 35%), hsl(205, 60%, 50%)); }
 .bar-fill.purple { background: linear-gradient(90deg, hsl(265, 40%, 35%), hsl(265, 50%, 50%)); }
@@ -1063,13 +1084,13 @@
   display: flex; justify-content: space-between; padding: 0.5rem 0;
   border-bottom: 1px solid hsl(210, 6%, 18%); font-size: 0.9rem;
 }
-.payment-row span { color: hsl(141, 15%, 45%); }
+.payment-row span { color: hsl(347, 15%, 45%); }
 .payment-row strong { color: #fff; }
 .payment-total {
   display: flex; justify-content: space-between; padding: 0.8rem 0; margin-top: 0.5rem;
-  border-top: 2px solid hsl(141, 30%, 25%); font-size: 1.1rem;
+  border-top: 2px solid hsl(347, 30%, 25%); font-size: 1.1rem;
 }
-.payment-total span { color: hsl(141, 30%, 65%); }
+.payment-total span { color: hsl(347, 30%, 65%); }
 .payment-total strong { color: #4ade80; font-family: "Courier New", monospace; }
 
 .receipt-container { text-align: center; padding: 1rem 0; }
@@ -1108,7 +1129,7 @@
   font-family: "Courier New", Courier, monospace;
 }
 .revenue-label {
-  font-size: 0.7rem; color: hsl(141, 12%, 40%); text-transform: uppercase;
+  font-size: 0.7rem; color: hsl(347, 12%, 40%); text-transform: uppercase;
   letter-spacing: 0.5px; display: block; margin-top: 0.15rem;
 }
 .revenue-summary { margin-top: 0.5rem; }
