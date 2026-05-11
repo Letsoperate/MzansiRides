@@ -166,8 +166,18 @@ public class EmailService {
         String body = buildEmailTemplate("Congratulations!",
                 "Hi " + fullName + ",",
                 "Great news! Your driver application has been approved. Welcome to the MzansiRides fleet.",
-                "Login to Dashboard", "" + siteUrl + "/sign-in",
+                "Login to Dashboard", siteUrl + "/sign-in",
                 "Welcome aboard, MzansiRides Team");
+        sendHtml(to, subject, body);
+    }
+
+    public void sendAdminCreatedEmail(String to, String fullName, String password) {
+        String subject = "MzansiRides - Admin Account Created";
+        String body = buildEmailTemplate("Admin Account Created",
+                "Hi " + fullName + ",",
+                "Your MzansiRides admin account has been created. Use the credentials below to log in to the admin dashboard.\n\nEmail: " + to + "\nPassword: " + password + "\n\nPlease change your password after logging in.",
+                "Go to Admin Dashboard", siteUrl + "/admin/login",
+                "Welcome to the team, MzansiRides Admin");
         sendHtml(to, subject, body);
     }
 

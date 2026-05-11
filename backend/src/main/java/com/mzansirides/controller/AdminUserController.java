@@ -2,6 +2,7 @@ package com.mzansirides.controller;
 
 import com.mzansirides.model.Admin;
 import com.mzansirides.repository.AdminRepository;
+import com.mzansirides.service.EmailService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +17,12 @@ public class AdminUserController {
 
     private final AdminRepository adminRepo;
     private final PasswordEncoder encoder;
+    private final EmailService emailService;
 
-    public AdminUserController(AdminRepository adminRepo, PasswordEncoder encoder) {
+    public AdminUserController(AdminRepository adminRepo, PasswordEncoder encoder, EmailService emailService) {
         this.adminRepo = adminRepo;
         this.encoder = encoder;
+        this.emailService = emailService;
     }
 
     @GetMapping
@@ -59,6 +62,12 @@ public class AdminUserController {
         admin.setCreatedAt(LocalDateTime.now());
         admin.setCreatedBy(createdByEmail);
         adminRepo.save(admin);
+
+        try {
+            emailService.sendAdminCreatedEmail(email, fullName, password);
+        } catch (Exception e) {
+            // Email failure shouldn't block admin creation
+        }
 
         return ResponseEntity.ok(Map.of("message", "Admin created", "id", admin.getId()));
     }
