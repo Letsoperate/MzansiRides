@@ -6,10 +6,10 @@
 .admin-panel {
   background: linear-gradient(
     145deg,
-    hsla(347, 40%, 35%, 0.15),
+    hsla(141, 40%, 35%, 0.15),
     hsla(210, 30%, 10%, 0.6)
   );
-  border: 1px solid hsla(347, 55%, 55%, 0.35);
+  border: 1px solid hsla(141, 55%, 55%, 0.35);
   border-radius: 20px;
   backdrop-filter: blur(12px);
 }
@@ -28,7 +28,7 @@
 .admin-subtitle {
   margin-top: 0.5rem;
   margin-bottom: 1.3rem;
-  color: hsl(347, 20%, 75%);
+  color: hsl(141, 20%, 75%);
   line-height: 1.45;
 }
 
@@ -36,8 +36,8 @@
 .admin-note-input,
 .admin-modal-input {
   width: 100%;
-  border: 1px solid hsla(347, 45%, 50%, 0.45);
-  background: hsla(347, 15%, 7%, 0.85);
+  border: 1px solid hsla(141, 45%, 50%, 0.45);
+  background: hsla(141, 15%, 7%, 0.85);
   color: hsl(0, 0%, 100%);
   border-radius: 12px;
   padding: 0.9em 1em;
@@ -47,8 +47,8 @@
 .admin-form-group input:focus,
 .admin-note-input:focus,
 .admin-modal-input:focus {
-  border-color: hsl(347, 62%, 41%);
-  box-shadow: 0 0 0 3px hsla(347, 62%, 41%, 0.25);
+  border-color: hsl(141, 62%, 41%);
+  box-shadow: 0 0 0 3px hsla(141, 62%, 41%, 0.25);
 }
 
 .admin-primary-btn,
@@ -65,13 +65,13 @@
 
 .admin-primary-btn {
   width: 100%;
-  background: linear-gradient(135deg, hsl(347, 62%, 41%), hsl(347, 50%, 35%));
+  background: linear-gradient(135deg, hsl(141, 62%, 41%), hsl(141, 50%, 35%));
   color: hsl(0, 0%, 100%);
   font-weight: 600;
 }
 .admin-primary-btn:hover {
-  background: linear-gradient(135deg, hsl(347, 65%, 45%), hsl(347, 55%, 38%));
-  box-shadow: 0 4px 15px hsla(347, 62%, 41%, 0.3);
+  background: linear-gradient(135deg, hsl(141, 65%, 45%), hsl(141, 55%, 38%));
+  box-shadow: 0 4px 15px hsla(141, 62%, 41%, 0.3);
 }
 .admin-primary-btn:disabled {
   opacity: 0.5;
@@ -79,12 +79,12 @@
 }
 
 .admin-secondary-btn {
-  background-color: hsla(347, 40%, 35%, 0.14);
-  border: 1px solid hsla(347, 55%, 55%, 0.5);
-  color: hsl(347, 60%, 75%);
+  background-color: hsla(141, 40%, 35%, 0.14);
+  border: 1px solid hsla(141, 55%, 55%, 0.5);
+  color: hsl(141, 60%, 75%);
 }
 .admin-secondary-btn:hover {
-  background-color: hsla(347, 40%, 35%, 0.25);
+  background-color: hsla(141, 40%, 35%, 0.25);
 }
 
 .admin-danger-btn {
@@ -97,14 +97,14 @@
   padding: 0.35em 0.75em;
   font-size: 0.8rem;
   border-radius: 8px;
-  border: 1px solid hsla(347, 55%, 55%, 0.4);
-  background: hsla(347, 40%, 30%, 0.2);
-  color: hsl(347, 40%, 80%);
+  border: 1px solid hsla(141, 55%, 55%, 0.4);
+  background: hsla(141, 40%, 30%, 0.2);
+  color: hsl(141, 40%, 80%);
   cursor: pointer;
   transition: all 0.3s ease;
 }
 .admin-sm-btn:hover {
-  background: hsla(347, 62%, 41%, 0.3);
+  background: hsla(141, 62%, 41%, 0.3);
 }
 .admin-sm-btn.danger {
   border-color: hsla(0, 70%, 50%, 0.5);
@@ -119,14 +119,14 @@
 }
 
 .admin-note {
-  color: hsl(347, 40%, 75%);
+  color: hsl(141, 40%, 75%);
 }
 
 .admin-back-link {
   display: inline-block;
   margin-top: 0.7rem;
   text-decoration: none;
-  color: hsl(347, 60%, 65%);
+  color: hsl(141, 60%, 65%);
 }
 
 .admin-error {
@@ -135,7 +135,7 @@
 }
 
 .admin-success {
-  color: hsl(347, 60%, 60%);
+  color: hsl(141, 60%, 60%);
   margin-bottom: 0.8rem;
 }
 
@@ -159,12 +159,12 @@
 }
 
 .admin-stat-value {
-  color: hsl(347, 62%, 41%);
+  color: hsl(141, 62%, 41%);
   font-size: clamp(1.7rem, 2.1vw, 2.6rem);
 }
 
 .admin-stat-label {
-  color: hsl(347, 30%, 75%);
+  color: hsl(141, 30%, 75%);
   margin-top: 0.25rem;
 }
 
@@ -184,7 +184,7 @@
 }
 
 .admin-panel-text {
-  color: hsl(347, 30%, 75%);
+  color: hsl(141, 30%, 75%);
   line-height: 1.45;
   margin-bottom: 0.8rem;
 }
@@ -196,9 +196,9 @@
 }
 
 .admin-pill {
-  background-color: hsla(347, 40%, 35%, 0.2);
-  color: hsl(347, 55%, 65%);
-  border: 1px solid hsla(347, 55%, 55%, 0.35);
+  background-color: hsla(141, 40%, 35%, 0.2);
+  color: hsl(141, 55%, 65%);
+  border: 1px solid hsla(141, 55%, 55%, 0.35);
   border-radius: 999px;
   padding: 0.25em 0.8em;
   font-size: 0.85rem;
@@ -206,10 +206,10 @@
   transition: all 0.3s ease;
 }
 .admin-pill:hover {
-  background-color: hsla(347, 62%, 41%, 0.3);
+  background-color: hsla(141, 62%, 41%, 0.3);
 }
 .admin-pill.active {
-  background-color: hsla(347, 62%, 41%, 0.4);
+  background-color: hsla(141, 62%, 41%, 0.4);
   color: hsl(0, 0%, 100%);
 }
 
@@ -219,7 +219,7 @@
 }
 
 .admin-list-item {
-  color: hsl(347, 30%, 85%);
+  color: hsl(141, 30%, 85%);
 }
 
 .admin-checklist {
@@ -228,7 +228,7 @@
 }
 
 .admin-check-item {
-  color: hsl(347, 30%, 85%);
+  color: hsl(141, 30%, 85%);
   display: flex;
   align-items: center;
   gap: 0.55rem;
@@ -236,7 +236,7 @@
 }
 
 .admin-check-item input {
-  accent-color: hsl(347, 62%, 41%);
+  accent-color: hsl(141, 62%, 41%);
 }
 
 .admin-note-input {
@@ -257,16 +257,16 @@
 
 .admin-table th {
   text-align: left;
-  color: hsl(347, 55%, 65%);
+  color: hsl(141, 55%, 65%);
   padding: 0.6em 0.5em;
-  border-bottom: 1px solid hsla(347, 55%, 55%, 0.3);
+  border-bottom: 1px solid hsla(141, 55%, 55%, 0.3);
   font-weight: 600;
 }
 
 .admin-table td {
   padding: 0.5em 0.5em;
-  color: hsl(347, 30%, 85%);
-  border-bottom: 1px solid hsla(347, 55%, 40%, 0.1);
+  color: hsl(141, 30%, 85%);
+  border-bottom: 1px solid hsla(141, 55%, 40%, 0.1);
 }
 
 .admin-table .actions {
@@ -284,8 +284,8 @@
 }
 .admin-status-badge.available,
 .admin-status-badge.active {
-  background: hsla(347, 60%, 40%, 0.25);
-  color: hsl(347, 50%, 70%);
+  background: hsla(141, 60%, 40%, 0.25);
+  color: hsl(141, 50%, 70%);
 }
 .admin-status-badge.pending {
   background: hsla(45, 90%, 56%, 0.2);
@@ -302,8 +302,8 @@
 }
 .admin-status-badge.completed,
 .admin-status-badge.approved {
-  background: hsla(347, 50%, 35%, 0.25);
-  color: hsl(347, 45%, 65%);
+  background: hsla(141, 50%, 35%, 0.25);
+  color: hsl(141, 45%, 65%);
 }
 
 /* Modal */
@@ -324,7 +324,7 @@
 
 .admin-modal {
   background: linear-gradient(145deg, hsl(210, 10%, 12%), hsl(210, 12%, 8%));
-  border: 1px solid hsla(347, 55%, 55%, 0.35);
+  border: 1px solid hsla(141, 55%, 55%, 0.35);
   border-radius: 20px;
   padding: 2rem;
   width: 100%;
@@ -343,7 +343,7 @@
 
 .admin-modal-form-group label {
   display: block;
-  color: hsl(347, 40%, 75%);
+  color: hsl(141, 40%, 75%);
   margin-bottom: 0.3rem;
   font-size: 0.9rem;
 }
@@ -368,21 +368,21 @@
 .tab-btn {
   padding: 0.5em 1em;
   border-radius: 8px;
-  border: 1px solid hsla(347, 55%, 55%, 0.3);
-  background: hsla(347, 40%, 30%, 0.1);
-  color: hsl(347, 40%, 75%);
+  border: 1px solid hsla(141, 55%, 55%, 0.3);
+  background: hsla(141, 40%, 30%, 0.1);
+  color: hsl(141, 40%, 75%);
   cursor: pointer;
   font-size: 0.85rem;
   font-weight: 600;
   transition: all 0.3s ease;
 }
 .tab-btn:hover {
-  background: hsla(347, 62%, 41%, 0.2);
+  background: hsla(141, 62%, 41%, 0.2);
 }
 .tab-btn.active {
-  background: hsla(347, 62%, 41%, 0.35);
+  background: hsla(141, 62%, 41%, 0.35);
   color: hsl(0, 0%, 100%);
-  border-color: hsl(347, 62%, 41%);
+  border-color: hsl(141, 62%, 41%);
 }
 
 @media (max-width: 980px) {
