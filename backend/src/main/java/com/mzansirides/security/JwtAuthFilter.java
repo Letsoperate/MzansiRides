@@ -40,7 +40,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 Long userId = claims.get("id", Long.class);
 
                 var authorities = Collections.singletonList(
-                        new SimpleGrantedAuthority("ROLE_" + (role != null ? role : "USER")));
+                        new SimpleGrantedAuthority(role != null && role.startsWith("ROLE_") ? role : "ROLE_" + (role != null ? role : "USER")));
 
                 UsernamePasswordAuthenticationToken auth =
                         new UsernamePasswordAuthenticationToken(email, null, authorities);
