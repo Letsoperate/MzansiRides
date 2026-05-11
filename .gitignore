@@ -35,3 +35,4 @@ server/
 *.njsproj
 *.sln
 *.sw?
+docs/
