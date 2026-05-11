@@ -22,7 +22,7 @@ public class EmailService {
 
     public EmailService(JavaMailSender mailSender,
                         @Value("${mail.from:no-reply@mzansirides.co.za}") String fromAddress,
-                        @Value("${site.url:" + siteUrl + "}") String siteUrl) {
+                        @Value("${site.url:http://localhost:5173}") String siteUrl) {
         this.mailSender = mailSender;
         this.fromAddress = fromAddress;
         this.siteUrl = siteUrl;
@@ -42,7 +42,7 @@ public class EmailService {
 
     public void sendPasswordResetEmail(String to, String fullName, String token) {
         String subject = "MzansiRides - Reset Your Password";
-        String link = "" + siteUrl + "/reset-password?token=" + token;
+        String link = siteUrl + "/reset-password?token=" + token;
         String body = buildEmailTemplate("Reset Your Password",
                 "Hi " + fullName + ",",
                 "You requested to reset your password. Click the button below to create a new password.",
