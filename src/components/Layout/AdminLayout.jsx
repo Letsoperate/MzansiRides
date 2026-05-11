@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { clearAdminSession } from "../../utils/adminApi";
+import { clearAdminSession, getAdminUser } from "../../utils/adminApi";
 import "../../styles/admin-layout.css";
 
 const navItems = [
@@ -14,6 +14,7 @@ const navItems = [
 export default function AdminLayout() {
   const location = useLocation();
   const navigate = useNavigate();
+  const admin = getAdminUser();
   const [mobileNav, setMobileNav] = useState(false);
   const isLoginPage = location.pathname === "/admin/login";
 
@@ -50,6 +51,16 @@ export default function AdminLayout() {
               <span>{item.label}</span>
             </Link>
           ))}
+          {admin?.role === "SUPER_ADMIN" && (
+            <Link
+              to="/admin/users"
+              onClick={() => setMobileNav(false)}
+              className={`admin-topnav-link ${location.pathname === "/admin/users" ? "active" : ""}`}
+            >
+              <i className="fa-solid fa-users-gear"></i>
+              <span>Admins</span>
+            </Link>
+          )}
           <span className="admin-topnav-spacer"></span>
           <Link to="/home" className="admin-topnav-link">
             <i className="fa-solid fa-arrow-left"></i>

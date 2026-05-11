@@ -44,11 +44,12 @@ public class BookingService {
         return b;
     }
 
-    public Booking approve(Long id, boolean auto) {
+    public Booking approve(Long id, boolean auto, String approvedByEmail) {
         Booking b = getById(id);
         b.setStatus("approved");
         b.setApprovedAt(LocalDateTime.now());
         b.setAutoApproved(auto);
+        b.setApprovedBy(approvedByEmail);
         b = repo.save(b);
 
         if (b.getEmail() != null && !b.getEmail().isBlank()) {
@@ -92,9 +93,10 @@ public class BookingService {
         return b;
     }
 
-    public Booking reject(Long id) {
+    public Booking reject(Long id, String rejectedByEmail) {
         Booking b = getById(id);
         b.setStatus("rejected");
+        b.setRejectedBy(rejectedByEmail);
         return repo.save(b);
     }
 

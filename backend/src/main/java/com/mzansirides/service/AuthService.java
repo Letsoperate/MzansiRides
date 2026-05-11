@@ -25,11 +25,15 @@ public class AuthService {
         Admin admin = adminRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Invalid credentials"));
 
+        if (!admin.isActive()) {
+            throw new RuntimeException("Account deactivated. Contact super admin.");
+        }
+
         if (!passwordEncoder.matches(password, admin.getPasswordHash())) {
             throw new RuntimeException("Invalid credentials");
         }
 
-        String token = jwtUtil.generateToken(admin.getId(), admin.getEmail(), admin.getFullName());
+        String token = jwtUtil.generateToken(admin.getId(), admin.getEmail(), admin.getFullName(), admin.getRole());
         return new LoginResult(token, admin);
     }
 }

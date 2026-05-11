@@ -50,6 +50,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 request.setAttribute("userId", userId);
                 request.setAttribute("userEmail", email);
                 request.setAttribute("userRole", role);
+                request.setAttribute("adminRole", claims.get("adminRole", String.class));
             }
         }
 

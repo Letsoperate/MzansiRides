@@ -19,6 +19,7 @@ import FleetPage from "../pages/admin/FleetPage";
 import BookingsPage from "../pages/admin/BookingsPage";
 import DriversPage from "../pages/admin/DriversPage";
 import SupportPage from "../pages/admin/SupportPage";
+import AdminUsersPage from "../pages/admin/AdminUsersPage";
 import ForgotPassword from "../pages/ForgotPassword";
 import ResetPassword from "../pages/ResetPassword";
 import VerifyEmail from "../pages/VerifyEmail";
@@ -74,6 +75,7 @@ export default function AppRoutes() {
           <Route path="bookings" element={<AdminProtectedRoute><BookingsPage /></AdminProtectedRoute>} />
           <Route path="drivers" element={<AdminProtectedRoute><DriversPage /></AdminProtectedRoute>} />
           <Route path="support" element={<AdminProtectedRoute><SupportPage /></AdminProtectedRoute>} />
+          <Route path="users" element={<AdminProtectedRoute><AdminUsersPage /></AdminProtectedRoute>} />
         </Route>
       </Routes>
       <ScrollToTop />

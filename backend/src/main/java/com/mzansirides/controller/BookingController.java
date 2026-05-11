@@ -33,16 +33,18 @@ public class BookingController {
     }
 
     @PutMapping("/{id}/approve")
-    public ResponseEntity<Booking> approve(@PathVariable Long id, @RequestBody Map<String, Object> body) {
+    public ResponseEntity<Booking> approve(@PathVariable Long id, @RequestBody Map<String, Object> body,
+                                            @RequestAttribute("userEmail") String adminEmail) {
         try {
             boolean auto = body.containsKey("auto") && Boolean.TRUE.equals(body.get("auto"));
-            return ResponseEntity.ok(service.approve(id, auto));
+            return ResponseEntity.ok(service.approve(id, auto, adminEmail));
         } catch (RuntimeException e) { return ResponseEntity.notFound().build(); }
     }
 
     @PutMapping("/{id}/reject")
-    public ResponseEntity<Booking> reject(@PathVariable Long id) {
-        try { return ResponseEntity.ok(service.reject(id)); }
+    public ResponseEntity<Booking> reject(@PathVariable Long id,
+                                           @RequestAttribute("userEmail") String adminEmail) {
+        try { return ResponseEntity.ok(service.reject(id, adminEmail)); }
         catch (RuntimeException e) { return ResponseEntity.notFound().build(); }
     }
 

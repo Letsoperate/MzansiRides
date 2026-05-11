@@ -35,26 +35,32 @@ public class JwtUtil {
     }
 
     public String generateToken(Long adminId, String email, String fullName) {
-        return buildToken(adminId, email, fullName, "ADMIN");
+        return buildToken(adminId, email, fullName, "ROLE_ADMIN", "ADMIN");
+    }
+
+    public String generateToken(Long adminId, String email, String fullName, String adminRole) {
+        return buildToken(adminId, email, fullName, "ROLE_ADMIN", adminRole);
     }
 
     public String generateUserToken(Long userId, String email, String fullName) {
-        return buildToken(userId, email, fullName, "USER");
+        return buildToken(userId, email, fullName, "ROLE_USER", "USER");
     }
 
-    private String buildToken(Long id, String email, String fullName, String role) {
+    private String buildToken(Long id, String email, String fullName, String role, String adminRole) {
         Date now = new Date();
         Date expiry = new Date(now.getTime() + expiration);
-        return Jwts.builder()
+        var builder = Jwts.builder()
                 .subject(email)
                 .claim("id", id)
                 .claim("email", email)
                 .claim("fullName", fullName)
                 .claim("role", role)
                 .issuedAt(now)
-                .expiration(expiry)
-                .signWith(key)
-                .compact();
+                .expiration(expiry);
+        if (adminRole != null) {
+            builder.claim("adminRole", adminRole);
+        }
+        return builder.signWith(key).compact();
     }
 
     public Claims parseToken(String token) {

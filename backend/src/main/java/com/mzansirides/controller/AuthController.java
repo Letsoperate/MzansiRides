@@ -33,7 +33,8 @@ public class AuthController {
                 result.token(),
                 new LoginResponse.AdminInfo(result.admin().getId(),
                     result.admin().getEmail(),
-                    result.admin().getFullName())
+                    result.admin().getFullName(),
+                    result.admin().getRole())
             ));
         } catch (RuntimeException e) {
             return ResponseEntity.status(401).body(Map.of("message", "Invalid credentials"));

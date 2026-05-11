@@ -77,6 +77,12 @@ public class Booking {
     @Column(name = "dropoff_time")
     private String dropoffTime;
 
+    @Column(name = "approved_by")
+    private String approvedBy;
+
+    @Column(name = "rejected_by")
+    private String rejectedBy;
+
     public Booking() {}
 
     public Long getId() { return id; }
@@ -127,4 +133,8 @@ public class Booking {
     public void setCheckoutTime(String v) { this.checkoutTime = v; }
     public String getDropoffTime() { return dropoffTime; }
     public void setDropoffTime(String v) { this.dropoffTime = v; }
+    public String getApprovedBy() { return approvedBy; }
+    public void setApprovedBy(String v) { this.approvedBy = v; }
+    public String getRejectedBy() { return rejectedBy; }
+    public void setRejectedBy(String v) { this.rejectedBy = v; }
 }
