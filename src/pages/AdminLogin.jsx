@@ -41,7 +41,11 @@ export default function AdminLogin() {
         body: JSON.stringify({ email, password }),
       });
       setAdminSession(payload.token, payload.admin);
-      navigate("/admin/dashboard");
+      if (payload.mustChangePassword) {
+        navigate("/admin/change-password");
+      } else {
+        navigate("/admin/dashboard");
+      }
     } catch (requestError) {
       setError(requestError.message);
     } finally {

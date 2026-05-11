@@ -8,7 +8,7 @@ export default function AdminUsersPage() {
   const [admins, setAdmins] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState({ fullName: "", email: "", password: "" });
+  const [form, setForm] = useState({ fullName: "", email: "" });
   const [message, setMessage] = useState("");
 
   const load = useCallback(async () => {
@@ -31,14 +31,14 @@ export default function AdminUsersPage() {
   async function handleCreate(e) {
     e.preventDefault();
     setMessage("");
-    if (!form.fullName || !form.email || !form.password) {
-      setMessage("All fields required.");
+    if (!form.fullName || !form.email) {
+      setMessage("Full name and email are required.");
       return;
     }
     try {
       await apiRequest("/api/admin/users", { method: "POST", body: JSON.stringify(form) });
       setMessage("Admin created successfully!");
-      setForm({ fullName: "", email: "", password: "" });
+      setForm({ fullName: "", email: "" });
       setShowForm(false);
       load();
     } catch (err) {
@@ -111,10 +111,11 @@ export default function AdminUsersPage() {
           <h3 className="standard-fz sec-font-clr2">Add New Admin</h3>
           <input type="text" placeholder="Full Name" value={form.fullName} onChange={e => setForm({ ...form, fullName: e.target.value })}
             style={{ padding: "0.7em 1em", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.1)", background: "rgba(15,52,96,0.3)", color: "#fff", fontSize: "0.9rem" }} />
-          <input type="email" placeholder="Email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })}
+          <input type="email" placeholder="Email address" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })}
             style={{ padding: "0.7em 1em", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.1)", background: "rgba(15,52,96,0.3)", color: "#fff", fontSize: "0.9rem" }} />
-          <input type="password" placeholder="Password (min 6 chars)" value={form.password} onChange={e => setForm({ ...form, password: e.target.value })}
-            style={{ padding: "0.7em 1em", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.1)", background: "rgba(15,52,96,0.3)", color: "#fff", fontSize: "0.9rem" }} />
+          <p className="min-font" style={{ color: "#4ade80", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <i className="fa-solid fa-circle-info"></i> A temporary password will be generated and emailed to the admin.
+          </p>
           <button type="submit" className="pri-bg btn-padding transition standard-weight" style={{ border: "none", cursor: "pointer", borderRadius: "6px" }}>
             Create Admin
           </button>

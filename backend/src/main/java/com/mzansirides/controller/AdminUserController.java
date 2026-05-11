@@ -7,7 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.SecureRandom;
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +35,8 @@ public class AdminUserController {
         return ResponseEntity.ok(adminRepo.findAll());
     }
 
+    private static final SecureRandom RANDOM = new SecureRandom();
+
     @PostMapping
     public ResponseEntity<?> createAdmin(@RequestBody Map<String, String> body,
                                           @RequestAttribute("userEmail") String createdByEmail,
@@ -43,33 +47,41 @@ public class AdminUserController {
 
         String email = body.get("email");
         String fullName = body.get("fullName");
-        String password = body.get("password");
 
-        if (email == null || fullName == null || password == null || password.length() < 6) {
-            return ResponseEntity.badRequest().body(Map.of("message", "All fields required, password min 6 chars"));
+        if (email == null || fullName == null) {
+            return ResponseEntity.badRequest().body(Map.of("message", "Full name and email are required"));
         }
 
         if (adminRepo.findByEmail(email).isPresent()) {
             return ResponseEntity.badRequest().body(Map.of("message", "Admin with this email already exists"));
         }
 
+        String tempPassword = generateTempPassword();
+
         Admin admin = new Admin();
         admin.setEmail(email);
         admin.setFullName(fullName);
-        admin.setPasswordHash(encoder.encode(password));
+        admin.setPasswordHash(encoder.encode(tempPassword));
         admin.setRole("ADMIN");
         admin.setActive(true);
+        admin.setMustChangePassword(true);
         admin.setCreatedAt(LocalDateTime.now());
         admin.setCreatedBy(createdByEmail);
         adminRepo.save(admin);
 
         try {
-            emailService.sendAdminCreatedEmail(email, fullName, password);
+            emailService.sendAdminCreatedEmail(email, fullName, tempPassword);
         } catch (Exception e) {
             // Email failure shouldn't block admin creation
         }
 
         return ResponseEntity.ok(Map.of("message", "Admin created", "id", admin.getId()));
+    }
+
+    private String generateTempPassword() {
+        byte[] bytes = new byte[9];
+        RANDOM.nextBytes(bytes);
+        return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
     }
 
     @PutMapping("/{id}/toggle")

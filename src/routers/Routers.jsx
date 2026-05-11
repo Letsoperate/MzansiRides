@@ -14,6 +14,7 @@ import SignIn from "../pages/SignIn";
 import Error from "../pages/Error";
 import Reserve from "../pages/Reserve";
 import AdminLogin from "../pages/AdminLogin";
+import AdminChangePassword from "../pages/AdminChangePassword";
 import DashboardPage from "../pages/admin/DashboardPage";
 import FleetPage from "../pages/admin/FleetPage";
 import BookingsPage from "../pages/admin/BookingsPage";
@@ -70,6 +71,7 @@ export default function AppRoutes() {
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Navigate to="/admin/dashboard" replace />} />
           <Route path="login" element={<AdminLogin />} />
+          <Route path="change-password" element={<AdminChangePassword />} />
           <Route path="dashboard" element={<AdminProtectedRoute><DashboardPage /></AdminProtectedRoute>} />
           <Route path="fleet" element={<AdminProtectedRoute><FleetPage /></AdminProtectedRoute>} />
           <Route path="bookings" element={<AdminProtectedRoute><BookingsPage /></AdminProtectedRoute>} />

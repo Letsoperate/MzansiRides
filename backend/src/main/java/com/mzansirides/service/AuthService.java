@@ -36,4 +36,21 @@ public class AuthService {
         String token = jwtUtil.generateToken(admin.getId(), admin.getEmail(), admin.getFullName(), admin.getRole());
         return new LoginResult(token, admin);
     }
+
+    public void changePassword(Long adminId, String currentPassword, String newPassword) {
+        Admin admin = adminRepository.findById(adminId)
+                .orElseThrow(() -> new RuntimeException("Admin not found"));
+
+        if (!passwordEncoder.matches(currentPassword, admin.getPasswordHash())) {
+            throw new RuntimeException("Current password is incorrect");
+        }
+
+        if (newPassword == null || newPassword.length() < 6) {
+            throw new RuntimeException("New password must be at least 6 characters");
+        }
+
+        admin.setPasswordHash(passwordEncoder.encode(newPassword));
+        admin.setMustChangePassword(false);
+        adminRepository.save(admin);
+    }
 }
