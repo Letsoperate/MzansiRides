@@ -237,3 +237,18 @@ All emails appear as **"MzansiRides"** as the sender name with branded dark-them
 
 Private — MzansiRides 2026. All rights reserved.
 # Starter-Page
+
+## Team
+
+| Name | Role | GitHub |
+|---|---|---|
+| Lintshiwe Pontsho Ntoampi | Founder & CEO | [Lintshiwe](https://github.com/Lintshiwe) |
+| Koena Mbongz | Lead Developer | [Koena369](https://github.com/Koena369) |
+| Lesego Lekwene | Frontend Engineer | [LesegoLKW](https://github.com/LesegoLKW) |
+| Zandile Sosiba | Operations Manager | [Zandile](https://github.com/) |
+| Amanda Mngadi | UX/UI Designer | [AmandaMngadi](https://github.com/AmandaMngadi) |
+| Khomanani Mokoena | Backend Developer | [KhomiVumane](https://github.com/KhomiVumane) |
+| Ayuba Salimoshabangu | DevOps Engineer | [Ayuba](https://github.com/) |
+| Thandeka Shongwe | Marketing Lead | [ThandekaShongwe](https://github.com/ThandekaShongwe) |
+| Falakhe Shabangu | Customer Support | [falakheshabangu](https://github.com/falakheshabangu) |
+| Sinazo Mtwentula | QA & Testing Lead | [Mtwentula](https://github.com/Mtwentula) |
