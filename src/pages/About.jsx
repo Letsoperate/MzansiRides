@@ -75,6 +75,12 @@ export default function About() {
       teamName: "Falakhe Shabangu",
       teamPosition: "Customer Support",
     },
+    {
+      id: 10,
+      imgSrc: "https://ui-avatars.com/api/?name=Sinazo+Mtwentula&size=400&background=0f3460&color=fff&bold=true",
+      teamName: "Sinazo Mtwentula",
+      teamPosition: "QA & Testing Lead",
+    },
   ];
 
   return (
