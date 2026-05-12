@@ -7,6 +7,7 @@ import com.mzansirides.model.*;
 import com.mzansirides.service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -17,6 +18,9 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/public")
 public class PublicController {
+
+    @Value("${google.maps.api-key:}")
+    private String googleMapsApiKey;
 
     private final CarService carService;
     private final BookingService bookingService;
@@ -148,6 +152,11 @@ public class PublicController {
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(faqQuestionService.submit(email, question));
+    }
+
+    @GetMapping("/config")
+    public Map<String, String> config() {
+        return Map.of("googleMapsApiKey", googleMapsApiKey != null ? googleMapsApiKey : "");
     }
 
     @GetMapping("/health")
