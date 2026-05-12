@@ -14,15 +14,17 @@ export default function DashboardPage() {
   const [pendingDrivers, setPendingDrivers] = useState([]);
   const [openTickets, setOpenTickets] = useState([]);
   const [cars, setCars] = useState([]);
+  const [faqs, setFaqs] = useState([]);
 
   const load = useCallback(async () => {
     document.title = "MzansiRides - Dashboard";
     if (!hasAdminSession()) { navigate("/admin/login", { replace: true }); return; }
     try {
-      const [statsRes, bookingsRes, driversRes, ticketsRes, carsRes, subRes] = await Promise.all([
+      const [statsRes, bookingsRes, driversRes, ticketsRes, carsRes, subRes, faqsRes] = await Promise.all([
         apiRequest("/api/admin/stats"), apiRequest("/api/admin/bookings"),
         apiRequest("/api/admin/drivers"), apiRequest("/api/admin/tickets"),
         apiRequest("/api/admin/cars"), apiRequest("/api/admin/subscribers/count").catch(() => ({ count: 0 })),
+        apiRequest("/api/admin/faqs"),
       ]);
       setStats(statsRes.stats || []);
       setSubCount(subRes.count || 0);
@@ -31,6 +33,7 @@ export default function DashboardPage() {
       setPendingDrivers((driversRes || []).filter(d => d.status === "pending"));
       setOpenTickets((ticketsRes || []).filter(t => t.status === "open"));
       setCars(carsRes || []);
+      setFaqs(faqsRes || []);
     } catch (err) {
       if (err.status === 401 || err.status === 403) { clearAdminSession(); navigate("/admin/login"); }
     } finally { setIsLoading(false); }
@@ -53,6 +56,7 @@ export default function DashboardPage() {
   const activeBookings = parseInt(stats.find(s => s.label === "Active Bookings")?.value || 0);
   const pendingD = parseInt(stats.find(s => s.label === "Pending Drivers")?.value || 0);
   const openT = parseInt(stats.find(s => s.label === "Support Tickets")?.value || 0);
+  const pendingF = parseInt(stats.find(s => s.label === "Pending FAQs")?.value || 0);
 
   const maxVal = Math.max(available, activeBookings, pendingD, openT, 1);
 
@@ -150,6 +154,12 @@ export default function DashboardPage() {
                   <td><span className="indicator purple">● Open</span></td>
                   <td><div className="bar"><div className="bar-fill purple" style={{ width: `${(openT / maxVal) * 100}%` }}></div></div></td>
                 </tr>
+                <tr>
+                  <td><i className="fa-solid fa-circle-question" style={{ color: "#f97316" }}></i> Pending FAQs</td>
+                  <td className="mono">{String(pendingF).padStart(3, "0")}</td>
+                  <td><span className="indicator orange">● Pending</span></td>
+                  <td><div className="bar"><div className="bar-fill orange" style={{ width: `${(pendingF / maxVal) * 100}%`, background: "#f97316" }}></div></div></td>
+                </tr>
                 <tr className="sub-row">
                   <td><i className="fa-solid fa-envelope" style={{ color: "#e94560" }}></i> Subscribers</td>
                   <td className="mono">{String(subCount).padStart(3, "0")}</td>
@@ -217,7 +227,24 @@ export default function DashboardPage() {
             {openTickets.map(t => (
               <div key={t.id} className="sys-row">
                 <div><strong>{t.customerName}</strong><span>{t.subject || "No subject"}</span></div>
-                <span className="badge open">open</span>
+                <div style={{ display: "flex", gap: "4px" }}>
+                  <button onClick={async () => { await apiRequest(`/api/admin/tickets/${t.id}/status`, { method: "PUT", body: JSON.stringify({ status: "resolved" }) }); load(); }} className="admin-btn sm success">Resolve</button>
+                  <button onClick={async () => { if (window.confirm("Delete?")) { await apiRequest(`/api/admin/tickets/${t.id}`, { method: "DELETE" }); load(); } }} className="admin-btn sm danger">Del</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Pending FAQs */}
+        <div className="classic-panel">
+          <div className="classic-panel-header">Pending FAQs ({faqs.filter(f => f.status === "pending").length})</div>
+          <div className="classic-panel-body sys-list">
+            {faqs.filter(f => f.status === "pending").length === 0 && <p className="sys-empty">No pending FAQs</p>}
+            {faqs.filter(f => f.status === "pending").slice(0, 5).map(f => (
+              <div key={f.id} className="sys-row">
+                <div><strong>{f.email}</strong><span>{f.question?.substring(0, 60)}{f.question?.length > 60 ? "..." : ""}</span></div>
+                <span className="badge pending">pending</span>
               </div>
             ))}
           </div>

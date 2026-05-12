@@ -2,6 +2,7 @@ package com.mzansirides.service;
 
 import com.mzansirides.model.Subscriber;
 import com.mzansirides.repository.SubscriberRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -15,10 +16,13 @@ public class NewsletterService {
     private final SubscriberRepository subscriberRepository;
     private final EmailService emailService;
     private final SecureRandom random = new SecureRandom();
+    private final String siteUrl;
 
-    public NewsletterService(SubscriberRepository subscriberRepository, EmailService emailService) {
+    public NewsletterService(SubscriberRepository subscriberRepository, EmailService emailService,
+                             @Value("${site.url:http://localhost:5173}") String siteUrl) {
         this.subscriberRepository = subscriberRepository;
         this.emailService = emailService;
+        this.siteUrl = siteUrl;
     }
 
     public record SendResult(int total, int sent, int failed) {}
@@ -84,7 +88,7 @@ public class NewsletterService {
     }
 
     private String buildNewsletterEmail(String email, String unsubscribeToken, String subject, String message) {
-        String unsubLink = "http://localhost:5173/unsubscribe?token=" + (unsubscribeToken != null ? unsubscribeToken : "");
+        String unsubLink = siteUrl + "/unsubscribe?token=" + (unsubscribeToken != null ? unsubscribeToken : "");
         return """
             <!DOCTYPE html>
             <html>

@@ -28,35 +28,44 @@ export default function Faq() {
   const inputRef = useRef(null);
   const questionRef = useRef(null);
 
-  function notify(e) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  async function notify(e) {
     e.preventDefault();
-    if (inputRef.current.value === "" && questionRef.current.value === "") {
-      toast.error("Please fill in the fields", {
-        theme: "dark",
+    const email = inputRef.current.value;
+    const question = questionRef.current.value;
+
+    if (email === "" && question === "") {
+      toast.error("Please fill in the fields", { theme: "dark" });
+      return;
+    }
+    if (email.match(emailRegex) && question === "") {
+      toast.error("Please enter a question", { theme: "dark" });
+      return;
+    }
+    if (!email.match(emailRegex)) {
+      toast.error("Please enter a valid email", { theme: "dark" });
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("/api/public/faqs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, question }),
       });
-    } else if (
-      inputRef.current.value.match(emailRegex) &&
-      questionRef.current.value === ""
-    ) {
-      toast.error("Please enter a question", {
-        theme: "dark",
-      });
-    } else if (
-      (!inputRef.current.value.match(emailRegex) &&
-        questionRef.current.value !== "") ||
-      (!inputRef.current.value.match(emailRegex) &&
-        questionRef.current.value === "")
-    ) {
-      toast.error("Please enter a valid email", {
-        theme: "dark",
-      });
-    } else {
-      toast.success(
-        "Your question has been sent successfully, we will email you the answer shortly.",
-        {
-          theme: "dark",
-        }
-      );
+      if (res.ok) {
+        toast.success("Your question has been sent successfully, we will email you the answer shortly.", { theme: "dark" });
+        inputRef.current.value = "";
+        questionRef.current.value = "";
+      } else {
+        toast.error("Failed to send question. Please try again.", { theme: "dark" });
+      }
+    } catch {
+      toast.error("Network error. Please try again.", { theme: "dark" });
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -122,8 +131,10 @@ export default function Faq() {
           <button
             onClick={notify}
             className="pri-bg transition standard-weight"
+            disabled={isSubmitting}
+            style={{ opacity: isSubmitting ? 0.7 : 1 }}
           >
-            SEND QUESTION
+            {isSubmitting ? "SENDING..." : "SEND QUESTION"}
             <i
               style={{ marginLeft: ".4em" }}
               className="fa-solid fa-paper-plane"

@@ -24,18 +24,21 @@ public class PublicController {
     private final SupportTicketService supportTicketService;
     private final ContactService contactService;
     private final EmailService emailService;
+    private final FaqQuestionService faqQuestionService;
 
     public PublicController(CarService carService, BookingService bookingService,
                             DriverApplicationService driverApplicationService,
                             SupportTicketService supportTicketService,
                             ContactService contactService,
-                            EmailService emailService) {
+                            EmailService emailService,
+                            FaqQuestionService faqQuestionService) {
         this.carService = carService;
         this.bookingService = bookingService;
         this.driverApplicationService = driverApplicationService;
         this.supportTicketService = supportTicketService;
         this.contactService = contactService;
         this.emailService = emailService;
+        this.faqQuestionService = faqQuestionService;
     }
 
     @GetMapping("/cars")
@@ -135,6 +138,16 @@ public class PublicController {
         ticket.setStatus("open");
         ticket.setCreatedAt(LocalDateTime.now());
         return ResponseEntity.status(HttpStatus.CREATED).body(supportTicketService.createTicket(ticket));
+    }
+
+    @PostMapping("/faqs")
+    public ResponseEntity<FaqQuestion> submitFaq(@RequestBody Map<String, String> body) {
+        String email = body.get("email");
+        String question = body.get("question");
+        if (email == null || email.isBlank() || question == null || question.isBlank()) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(faqQuestionService.submit(email, question));
     }
 
     @GetMapping("/health")

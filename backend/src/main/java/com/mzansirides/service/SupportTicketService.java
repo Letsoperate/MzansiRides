@@ -33,4 +33,22 @@ public class SupportTicketService {
         ticket.setStatus(status);
         return supportTicketRepository.save(ticket);
     }
+
+    public SupportTicket updateTicket(Long id, SupportTicket updated) {
+        SupportTicket ticket = supportTicketRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Ticket not found"));
+        if (updated.getSubject() != null) ticket.setSubject(updated.getSubject());
+        if (updated.getMessage() != null) ticket.setMessage(updated.getMessage());
+        if (updated.getCustomerName() != null) ticket.setCustomerName(updated.getCustomerName());
+        if (updated.getEmail() != null) ticket.setEmail(updated.getEmail());
+        if (updated.getStatus() != null) ticket.setStatus(updated.getStatus());
+        return supportTicketRepository.save(ticket);
+    }
+
+    public void deleteTicket(Long id) {
+        if (!supportTicketRepository.existsById(id)) {
+            throw new RuntimeException("Ticket not found");
+        }
+        supportTicketRepository.deleteById(id);
+    }
 }

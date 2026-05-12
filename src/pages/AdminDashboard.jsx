@@ -34,22 +34,27 @@ export default function AdminDashboard() {
   const [newsletterSubject, setNewsletterSubject] = useState("");
   const [newsletterMessage, setNewsletterMessage] = useState("");
   const [isSendingNewsletter, setIsSendingNewsletter] = useState(false);
+  const [faqs, setFaqs] = useState([]);
+  const [faqAnswer, setFaqAnswer] = useState("");
+  const [answeringFaqId, setAnsweringFaqId] = useState(null);
 
   const loadDashboard = useCallback(async () => {
     window.scrollTo(0, 0);
     document.title = "MzansiRides - Admin Dashboard";
     if (!hasAdminSession()) { navigate("/admin/login", { replace: true }); return; }
     try {
-      const [statsRes, noteRes, carsRes, bookingsRes, driversRes, ticketsRes] = await Promise.all([
+      const [statsRes, noteRes, carsRes, bookingsRes, driversRes, ticketsRes, faqsRes] = await Promise.all([
         apiRequest("/api/admin/stats"), apiRequest("/api/admin/notes/latest"),
         apiRequest("/api/admin/cars"), apiRequest("/api/admin/bookings"),
         apiRequest("/api/admin/drivers"), apiRequest("/api/admin/tickets"),
+        apiRequest("/api/admin/faqs"),
       ]);
       setStats(statsRes.stats || []);
       setBookingOverview(statsRes.bookingOverview || { johannesburg: 0, capeTown: 0, durban: 0 });
       setNoteText(noteRes.note?.noteText || "");
       setCars(carsRes || []); setBookings(bookingsRes || []);
       setDrivers(driversRes || []); setTickets(ticketsRes || []);
+      setFaqs(faqsRes || []);
       try { const sr = await apiRequest("/api/admin/subscribers/count"); setSubscriberCount(sr.count || 0); } catch {}
     } catch (err) {
       if (err.status === 401 || err.status === 403) {
@@ -73,12 +78,14 @@ export default function AdminDashboard() {
 
   async function refreshData() {
     try {
-      const [statsRes, carsRes, bookingsRes, driversRes, ticketsRes] = await Promise.all([
+      const [statsRes, carsRes, bookingsRes, driversRes, ticketsRes, faqsRes] = await Promise.all([
         apiRequest("/api/admin/stats"), apiRequest("/api/admin/cars"),
         apiRequest("/api/admin/bookings"), apiRequest("/api/admin/drivers"), apiRequest("/api/admin/tickets"),
+        apiRequest("/api/admin/faqs"),
       ]);
       setStats(statsRes.stats || []); setBookingOverview(statsRes.bookingOverview || { johannesburg: 0, capeTown: 0, durban: 0 });
       setCars(carsRes || []); setBookings(bookingsRes || []); setDrivers(driversRes || []); setTickets(ticketsRes || []);
+      setFaqs(faqsRes || []);
       try { const sr = await apiRequest("/api/admin/subscribers/count"); setSubscriberCount(sr.count || 0); } catch {}
     } catch (e) { setStatusMessage(e.message || "Refresh failed."); }
   }
@@ -115,6 +122,19 @@ export default function AdminDashboard() {
   async function updateBookingStatus(id, status) { try { await apiRequest(`/api/admin/bookings/${id}/status`, { method: "PUT", body: JSON.stringify({ status }) }); refreshData(); } catch (e) { setStatusMessage(e.message); } }
   async function updateDriverStatus(id, status) { try { await apiRequest(`/api/admin/drivers/${id}/status`, { method: "PUT", body: JSON.stringify({ status }) }); refreshData(); } catch (e) { setStatusMessage(e.message); } }
   async function updateTicketStatus(id, status) { try { await apiRequest(`/api/admin/tickets/${id}/status`, { method: "PUT", body: JSON.stringify({ status }) }); refreshData(); } catch (e) { setStatusMessage(e.message); } }
+  async function deleteTicket(id) { if (!window.confirm("Delete this ticket?")) return; try { await apiRequest(`/api/admin/tickets/${id}`, { method: "DELETE" }); refreshData(); } catch (e) { setStatusMessage(e.message); } }
+
+  async function answerFaq(id) {
+    if (!faqAnswer.trim()) { setStatusMessage("Answer required."); return; }
+    try { await apiRequest(`/api/admin/faqs/${id}/answer`, { method: "PUT", body: JSON.stringify({ answer: faqAnswer }) }); setFaqAnswer(""); setAnsweringFaqId(null); refreshData(); }
+    catch (e) { setStatusMessage(e.message); }
+  }
+
+  async function deleteFaq(id) {
+    if (!window.confirm("Delete this FAQ?")) return;
+    try { await apiRequest(`/api/admin/faqs/${id}`, { method: "DELETE" }); refreshData(); }
+    catch (e) { setStatusMessage(e.message); }
+  }
 
   async function sendNewsletter() {
     if (!newsletterSubject.trim() || !newsletterMessage.trim()) { setStatusMessage("Subject and message required."); return; }
@@ -130,6 +150,7 @@ export default function AdminDashboard() {
   const tabs = [
     { key: "cars", label: "Fleet" }, { key: "bookings", label: "Bookings" },
     { key: "drivers", label: "Drivers" }, { key: "tickets", label: "Tickets" },
+    { key: "faqs", label: `FAQs (${faqs.filter(f => f.status === "pending").length})` },
     { key: "newsletter", label: "Newsletter" },
   ];
 
@@ -250,8 +271,32 @@ export default function AdminDashboard() {
                     <tr key={t.id}><td>{t.customerName}</td>
                       <td><span className={`admin-status-badge ${t.status}`}>{t.status}</span></td>
                       <td>{t.createdAt ? new Date(t.createdAt).toLocaleDateString() : "-"}</td>
-                      <td className="actions">{t.status === "open" && <button className="admin-sm-btn" onClick={() => updateTicketStatus(t.id, "resolved")}>Resolve</button>}</td>
+                      <td className="actions">
+                        {t.status === "open" && <button className="admin-sm-btn" onClick={() => updateTicketStatus(t.id, "resolved")}>Resolve</button>}
+                        {t.status === "resolved" && <button className="admin-sm-btn" onClick={() => updateTicketStatus(t.id, "open")}>Reopen</button>}
+                        <button className="admin-sm-btn danger" onClick={() => deleteTicket(t.id)}>Delete</button>
+                      </td>
                     </tr>))}
+                  </tbody></table>
+              )}
+
+              {activeTab === "faqs" && (
+                <table className="admin-table"><thead><tr><th>Email</th><th>Question</th><th>Status</th><th></th></tr></thead>
+                  <tbody>{faqs.map((f) => (
+                    <tr key={f.id}><td>{f.email}</td><td>{f.question?.substring(0, 60)}{f.question?.length > 60 ? "..." : ""}</td>
+                      <td><span className={`admin-status-badge ${f.status}`}>{f.status}</span></td>
+                      <td className="actions">
+                        {f.status === "pending" && (answeringFaqId === f.id ? (
+                          <div style={{ display: "flex", gap: "4px", alignItems: "center" }}>
+                            <input value={faqAnswer} onChange={(e) => setFaqAnswer(e.target.value)} placeholder="Answer..." style={{ padding: "4px 8px", borderRadius: "4px", border: "1px solid #555", background: "#1a1a2e", color: "#e0e0e0", fontSize: "12px", width: "120px" }} />
+                            <button className="admin-sm-btn" onClick={() => answerFaq(f.id)}>Save</button>
+                            <button className="admin-sm-btn" onClick={() => { setAnsweringFaqId(null); setFaqAnswer(""); }}>Cancel</button>
+                          </div>
+                        ) : <button className="admin-sm-btn" onClick={() => { setAnsweringFaqId(f.id); setFaqAnswer(""); }}>Answer</button>)}
+                        <button className="admin-sm-btn danger" onClick={() => deleteFaq(f.id)}>Del</button>
+                      </td>
+                    </tr>))}
+                    {faqs.length === 0 && <tr><td colSpan="4" style={{ textAlign: "center", padding: "2rem", color: "hsl(141,20%,60%)" }}>No FAQ questions yet.</td></tr>}
                   </tbody></table>
               )}
 

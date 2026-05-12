@@ -1041,6 +1041,7 @@
 .indicator.blue { color: hsl(205, 60%, 55%); }
 .indicator.purple { color: hsl(265, 50%, 60%); }
 .indicator.red { color: hsl(0, 55%, 55%); }
+.indicator.orange { color: hsl(24, 80%, 55%); }
 
 .bar {
   height: 18px; background: hsl(210, 6%, 12%);
@@ -1053,6 +1054,7 @@
 .bar-fill.blue { background: linear-gradient(90deg, hsl(205, 50%, 35%), hsl(205, 60%, 50%)); }
 .bar-fill.purple { background: linear-gradient(90deg, hsl(265, 40%, 35%), hsl(265, 50%, 50%)); }
 .bar-fill.red { background: linear-gradient(90deg, hsl(0, 45%, 30%), hsl(0, 55%, 45%)); }
+.bar-fill.orange { background: linear-gradient(90deg, hsl(24, 70%, 35%), hsl(24, 80%, 50%)); }
 
 @media (max-width: 900px) { .panel-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 550px) { .panel-grid { grid-template-columns: 1fr; } }
