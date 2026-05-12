@@ -15,6 +15,9 @@ export default function DashboardPage() {
   const [openTickets, setOpenTickets] = useState([]);
   const [cars, setCars] = useState([]);
   const [faqs, setFaqs] = useState([]);
+  const [reportStart, setReportStart] = useState("");
+  const [reportEnd, setReportEnd] = useState("");
+  const [isDownloading, setIsDownloading] = useState(false);
 
   const load = useCallback(async () => {
     document.title = "MzansiRides - Dashboard";
@@ -40,6 +43,31 @@ export default function DashboardPage() {
   }, [navigate]);
 
   useEffect(() => { load(); }, [load]);
+
+  async function downloadReport(format) {
+    setIsDownloading(true);
+    try {
+      const token = localStorage.getItem("mzansi_admin_token");
+      const params = new URLSearchParams({ format });
+      if (reportStart) params.set("start", reportStart);
+      if (reportEnd) params.set("end", reportEnd);
+      const res = await fetch(`/api/admin/reports/revenue?${params}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) throw new Error("Download failed");
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `revenue-report.${format}`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setIsDownloading(false);
+    }
+  }
 
   if (isLoading) return <div className="admin-loading">Loading...</div>;
 
@@ -77,7 +105,22 @@ export default function DashboardPage() {
       <div className="panel-grid">
         {/* Revenue Section */}
         <div className="classic-panel panel-span">
-          <div className="classic-panel-header">Revenue & Financial Overview</div>
+          <div className="classic-panel-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "8px" }}>
+            <span>Revenue & Financial Overview</span>
+            <div style={{ display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap" }}>
+              <input type="date" value={reportStart} onChange={(e) => setReportStart(e.target.value)}
+                style={{ padding: "4px 8px", borderRadius: "4px", border: "1px solid #444", background: "#1a1a2e", color: "#e0e0e0", fontSize: "12px" }} />
+              <span style={{ color: "#888", fontSize: "12px" }}>to</span>
+              <input type="date" value={reportEnd} onChange={(e) => setReportEnd(e.target.value)}
+                style={{ padding: "4px 8px", borderRadius: "4px", border: "1px solid #444", background: "#1a1a2e", color: "#e0e0e0", fontSize: "12px" }} />
+              <button onClick={() => downloadReport("csv")} disabled={isDownloading} className="admin-btn sm" style={{ fontSize: "11px" }}>
+                <i className="fa-solid fa-file-csv"></i> CSV
+              </button>
+              <button onClick={() => downloadReport("pdf")} disabled={isDownloading} className="admin-btn sm" style={{ fontSize: "11px" }}>
+                <i className="fa-solid fa-file-pdf"></i> PDF
+              </button>
+            </div>
+          </div>
           <div className="classic-panel-body">
             <div className="revenue-grid">
               <div className="revenue-card">
