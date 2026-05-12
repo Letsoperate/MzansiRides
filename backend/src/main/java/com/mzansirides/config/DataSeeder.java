@@ -7,7 +7,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Component
@@ -15,15 +14,13 @@ public class DataSeeder implements CommandLineRunner {
 
     private final AdminRepository adminRepo;
     private final CarRepository carRepo;
-    private final BookingRepository bookingRepo;
     private final DriverApplicationRepository driverRepo;
-    private final SupportTicketRepository ticketRepo;
     private final PasswordEncoder encoder;
 
-    public DataSeeder(AdminRepository ar, CarRepository cr, BookingRepository br,
-                      DriverApplicationRepository dr, SupportTicketRepository tr, PasswordEncoder pe) {
-        this.adminRepo = ar; this.carRepo = cr; this.bookingRepo = br;
-        this.driverRepo = dr; this.ticketRepo = tr; this.encoder = pe;
+    public DataSeeder(AdminRepository ar, CarRepository cr,
+                      DriverApplicationRepository dr, PasswordEncoder pe) {
+        this.adminRepo = ar; this.carRepo = cr;
+        this.driverRepo = dr; this.encoder = pe;
     }
 
     @Override
@@ -50,24 +47,10 @@ public class DataSeeder implements CommandLineRunner {
             carRepo.save(car("Hyundai Tucson","SUV",1100,"available",img("Hyundai+Tucson","0f3460","f59e0b"),"Versatile mid-size SUV trusted across South Africa"));
         }
 
-        if (bookingRepo.count() == 0) {
-            bookingRepo.save(booking("K. Ndlovu","Johannesburg","Toyota Corolla","+27831234567","k.ndlovu@email.co.za","active", LocalDate.of(2026,5,2)));
-            bookingRepo.save(booking("T. Adams","Cape Town","Volkswagen Polo","+27839876543","t.adams@email.co.za","pending_approval", LocalDate.of(2026,5,3)));
-            bookingRepo.save(booking("A. Mthembu","Durban","Ford Everest","+27841112233","a.mthembu@email.co.za","approved", LocalDate.of(2026,5,5)));
-            bookingRepo.save(booking("J. Naidoo","Pretoria","Honda Civic","+27852223344","j.naidoo@email.co.za","completed", LocalDate.of(2026,4,28)));
-            bookingRepo.save(booking("M. Molefe","Gqeberha","Audi A4","+27863334455","m.molefe@email.co.za","pending_approval", LocalDate.of(2026,5,8)));
-        }
-
         if (driverRepo.count() == 0) {
             driverRepo.save(driver("S. Dlamini","s.dlamini@email.co.za","+27871112233","Johannesburg","pending"));
             driverRepo.save(driver("R. Van Wyk","r.vanwyk@email.co.za","+27872223344","Cape Town","pending"));
             driverRepo.save(driver("N. Mokoena","n.mokoena@email.co.za","+27873334455","Durban","approved"));
-        }
-
-        if (ticketRepo.count() == 0) {
-            ticketRepo.save(ticket("P. Khosa","Booking modification request","p.khosa@email.co.za","open"));
-            ticketRepo.save(ticket("L. Smith","Payment query - double charge","l.smith@email.co.za","open"));
-            ticketRepo.save(ticket("Y. Jacobs","Vehicle return extension","y.jacobs@email.co.za","resolved"));
         }
     }
 
@@ -76,20 +59,10 @@ public class DataSeeder implements CommandLineRunner {
         car.setDailyRate(BigDecimal.valueOf(r)); car.setStatus(s);
         car.setImage(i); car.setDescription(d); return car;
     }
-    private Booking booking(String n, String city, String cn, String p, String e, String s, LocalDate d) {
-        Booking b = new Booking(); b.setCustomerName(n); b.setCity(city); b.setCarName(cn);
-        b.setPhone(p); b.setEmail(e); b.setStatus(s); b.setCheckoutDate(d);
-        b.setCreatedAt(LocalDateTime.now()); return b;
-    }
     private DriverApplication driver(String n, String e, String p, String c, String s) {
         DriverApplication d = new DriverApplication(); d.setApplicantName(n);
         d.setEmail(e); d.setPhone(p); d.setCity(c); d.setStatus(s);
         d.setSubmittedAt(LocalDateTime.now()); return d;
-    }
-    private SupportTicket ticket(String n, String sub, String e, String s) {
-        SupportTicket t = new SupportTicket(); t.setCustomerName(n);
-        t.setSubject(sub); t.setEmail(e); t.setStatus(s);
-        t.setCreatedAt(LocalDateTime.now()); return t;
     }
     private static String img(String n, String bg, String ac) {
         return "https://placehold.co/600x400/"+bg+"/"+ac+"?text="+n+"&font=raleway";

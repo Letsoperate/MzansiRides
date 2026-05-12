@@ -116,9 +116,13 @@ export default function Reserve() {
     checkTotalPrice();
   }, [carPrice]);
 
+  function getTotalPrice() {
+    return parseInt(priceRef.current.innerText.replace("R", "")) || parseInt(selectedCar.dailyRate) || 0;
+  }
+
   function PayStack() {
     const paystack = new PaystackPop();
-    const totalPrice = parseInt(priceRef.current.innerText.replace("R", ""));
+    const totalPrice = getTotalPrice();
     paystack.newTransaction({
       key: "pk_test_51feaff4a12e482f6d6f9518147935823c73d0d8",
       amount: totalPrice * 100,
@@ -138,6 +142,8 @@ export default function Reserve() {
               phone: phoneRef.current.value,
               email: emailRef.current.value,
               checkoutDate: pickUpDateRef.current.value,
+              dropoffDate: dropOffDateRef.current.value,
+              totalAmount: totalPrice,
             }),
           });
         } catch {}
