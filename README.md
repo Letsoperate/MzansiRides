@@ -252,3 +252,5 @@ Private — MzansiRides 2026. All rights reserved.
 | Thandeka Shongwe | Marketing Lead | [ThandekaShongwe](https://github.com/ThandekaShongwe) |
 | Falakhe Shabangu | Customer Support | [falakheshabangu](https://github.com/falakheshabangu) |
 | Sinazo Mtwentula | QA & Testing Lead | [Mtwentula](https://github.com/Mtwentula) |
+
+Badge activation commit 1778555540
