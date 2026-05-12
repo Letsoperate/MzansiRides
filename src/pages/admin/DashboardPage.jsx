@@ -105,14 +105,14 @@ export default function DashboardPage() {
       <div className="panel-grid">
         {/* Revenue Section */}
         <div className="classic-panel panel-span">
-          <div className="classic-panel-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "8px" }}>
+          <div className="classic-panel-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "12px" }}>
             <span>Revenue & Financial Overview</span>
-            <div style={{ display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
               <input type="date" value={reportStart} onChange={(e) => setReportStart(e.target.value)}
-                style={{ padding: "4px 8px", borderRadius: "4px", border: "1px solid #444", background: "#1a1a2e", color: "#e0e0e0", fontSize: "12px" }} />
+                style={{ padding: "4px 8px", borderRadius: "4px", border: "1px solid #444", background: "#1a1a2e", color: "#e0e0e0", fontSize: "12px", width: "130px" }} />
               <span style={{ color: "#888", fontSize: "12px" }}>to</span>
               <input type="date" value={reportEnd} onChange={(e) => setReportEnd(e.target.value)}
-                style={{ padding: "4px 8px", borderRadius: "4px", border: "1px solid #444", background: "#1a1a2e", color: "#e0e0e0", fontSize: "12px" }} />
+                style={{ padding: "4px 8px", borderRadius: "4px", border: "1px solid #444", background: "#1a1a2e", color: "#e0e0e0", fontSize: "12px", width: "130px" }} />
               <button onClick={() => downloadReport("csv")} disabled={isDownloading} className="admin-btn sm" style={{ fontSize: "11px" }}>
                 <i className="fa-solid fa-file-csv"></i> CSV
               </button>
