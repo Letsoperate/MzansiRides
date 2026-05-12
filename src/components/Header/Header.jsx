@@ -1,14 +1,24 @@
 
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logoWhite from "../../assets/images/logos/logoWhite.png";
 import "../../styles/header.css";
+import { hasUserSession, getUser, clearUserSession } from "../../utils/authApi";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const loggedIn = hasUserSession();
+  const user = getUser();
 
   function toggleNav() {
     setIsOpen((prevOpen) => !prevOpen);
+  }
+
+  function handleLogout() {
+    clearUserSession();
+    setIsOpen(false);
+    navigate("/home");
   }
 
   return (
@@ -72,27 +82,40 @@ export default function Header() {
           </li>
         </ul>
         <div className="user-wrapper flex">
-          <Link
-            style={{
-              textDecoration: "none",
-            }}
-            onClick={toggleNav}
-            className="sign-in sec-font standard-fz scale transition pri-font-clr"
-            to="/sign-in"
-          >
-            Sign In
-          </Link>
-          <Link
-            style={{
-              textDecoration: "none",
-              borderRadius: "5px",
-            }}
-            onClick={toggleNav}
-            className="register sec-font standard-fz pri-bg btn-padding scale transition pri-font-clr"
-            to="/register"
-          >
-            Register
-          </Link>
+          {loggedIn ? (
+            <>
+              <span className="sec-font standard-fz pri-font-clr" style={{ marginRight: "0.8em" }}>
+                <i className="fa-solid fa-user" style={{ marginRight: "0.4em", color: "#e94560" }}></i>
+                {user?.fullName || "User"}
+              </span>
+              <button
+                onClick={handleLogout}
+                className="sign-in sec-font standard-fz scale transition pri-font-clr"
+                style={{ background: "none", border: "none", cursor: "pointer" }}
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                style={{ textDecoration: "none" }}
+                onClick={toggleNav}
+                className="sign-in sec-font standard-fz scale transition pri-font-clr"
+                to="/sign-in"
+              >
+                Sign In
+              </Link>
+              <Link
+                style={{ textDecoration: "none", borderRadius: "5px" }}
+                onClick={toggleNav}
+                className="register sec-font standard-fz pri-bg btn-padding scale transition pri-font-clr"
+                to="/register"
+              >
+                Register
+              </Link>
+            </>
+          )}
         </div>
       </nav>
       <div onClick={toggleNav} className="hamburger sec-font-clr2 standard-fz3">
