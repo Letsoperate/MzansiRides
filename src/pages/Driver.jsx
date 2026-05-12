@@ -1,4 +1,4 @@
-import { useContext,useEffect,useRef,useState, } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import { ToggleContext } from "../App";
 import SectionHeader from "../components/UI/SectionHeader";
@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 export default function Driver() {
   const { setDisplayHeader } = useContext(ToggleContext);
   const formRef = useRef(null);
+  const cityInputRef = useRef(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -14,22 +15,20 @@ export default function Driver() {
     document.title = "MzansiRides - Become a Driver";
   }, []);
 
-  const [countries, setCountries] = useState([]);
   useEffect(() => {
-    fetch("https://restcountries.com/v2/all")
-      .then((response) => response.json())
-      .then((data) => {
-        const countriesArray = data.map((country) => country.name);
-        setCountries(countriesArray);
-      })
-      .catch(() => {});
+    if (window.google && window.google.maps && cityInputRef.current) {
+      const autocomplete = new window.google.maps.places.Autocomplete(cityInputRef.current, {
+        types: ["(cities)"],
+        componentRestrictions: { country: "za" },
+      });
+      autocomplete.addListener("place_changed", () => {
+        const place = autocomplete.getPlace();
+        if (place.formatted_address && cityInputRef.current) {
+          cityInputRef.current.value = place.formatted_address;
+        }
+      });
+    }
   }, []);
-
-  const optionsElement = countries.map((country, index) => (
-    <option className="standard-weight" key={index} value={country}>
-      {country}
-    </option>
-  ));
 
   async function handleDriverSubmit(e) {
     e.preventDefault();
@@ -39,9 +38,11 @@ export default function Driver() {
     const lastName = formData.get("lastName") || "";
     const email = formData.get("email") || "";
     const phone = formData.get("phone") || "";
-    const city = formData.get("countries") || "";
+    const workHours = formData.get("workHours") || "";
+    const reason = formData.get("reason") || "";
+    const city = cityInputRef.current?.value || "";
 
-    if (!firstName || !lastName || !email || !phone || city === "select") {
+    if (!firstName || !lastName || !email || !phone || !city) {
       toast.error("Please fill in all required fields", { theme: "dark" });
       return;
     }
@@ -58,6 +59,7 @@ export default function Driver() {
       });
       toast.success("Application submitted successfully! We'll be in touch.", { theme: "dark" });
       form.reset();
+      if (cityInputRef.current) cityInputRef.current.value = "";
     } catch {
       toast.error("Failed to submit. Please try again.", { theme: "dark" });
     }
@@ -91,10 +93,7 @@ export default function Driver() {
           />
         </div>
         <div className="sub-header-margin">
-          <select required name="countries" id="countries">
-            <option className="standard-weight" value="select">Select Your City</option>
-            {optionsElement}
-          </select>
+          <input ref={cityInputRef} required type="text" placeholder="Type your city (e.g. Johannesburg)" />
         </div>
         <div className="CV-wrapper flex-main form-wrapper sub-header-margin pri-font-clr">
           <label htmlFor="file" className="standard-weight sec-font-clr">
@@ -105,12 +104,11 @@ export default function Driver() {
             style={{ flex: 1 }}
             id="file"
             type="file"
-            placeholder="Enter email"
           />
         </div>
         <div className="sub-header-margin">
           <p>Choose Favorable Working Hours</p>
-          <select required name="countries" id="countries">
+          <select required name="workHours" id="workHours">
             <option className="standard-weight" value="morning">Morning</option>
             <option className="standard-weight" value="afternoon">Afternoon</option>
             <option className="standard-weight" value="evening">Evening</option>
@@ -118,7 +116,7 @@ export default function Driver() {
         </div>
         <div className="sub-header-margin">
           <p>Why should we hire you?</p>
-          <textarea cols="30" rows="6"></textarea>
+          <textarea name="reason" cols="30" rows="6"></textarea>
         </div>
         <button className="pri-bg transition standard-weight">
           SUBMIT FOR REVIEW

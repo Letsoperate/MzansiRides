@@ -70,6 +70,7 @@ export default function Reserve() {
   const emailRef = useRef(null);
   const phoneRef = useRef(null);
   const cityRef = useRef(null);
+  const pickupAddressRef = useRef(null);
   const pickUpDateRef = useRef(null);
   const dropOffDateRef = useRef(null);
   const pickUpTimeRef = useRef(null);
@@ -116,6 +117,35 @@ export default function Reserve() {
     checkTotalPrice();
   }, [carPrice]);
 
+  useEffect(() => {
+    if (window.google && window.google.maps && cityRef.current) {
+      const autocomplete = new window.google.maps.places.Autocomplete(cityRef.current, {
+        types: ["(cities)"],
+        componentRestrictions: { country: "za" },
+      });
+      autocomplete.addListener("place_changed", () => {
+        const place = autocomplete.getPlace();
+        if (place.formatted_address && cityRef.current) {
+          cityRef.current.value = place.formatted_address;
+        }
+      });
+    }
+  }, [selectedCar]);
+
+  useEffect(() => {
+    if (window.google && window.google.maps && pickupAddressRef.current) {
+      const autocomplete = new window.google.maps.places.Autocomplete(pickupAddressRef.current, {
+        componentRestrictions: { country: "za" },
+      });
+      autocomplete.addListener("place_changed", () => {
+        const place = autocomplete.getPlace();
+        if (place.formatted_address && pickupAddressRef.current) {
+          pickupAddressRef.current.value = place.formatted_address;
+        }
+      });
+    }
+  }, [selectedCar]);
+
   function getTotalPrice() {
     return parseInt(priceRef.current.innerText.replace("R", "")) || parseInt(selectedCar.dailyRate) || 0;
   }
@@ -144,6 +174,7 @@ export default function Reserve() {
               checkoutDate: pickUpDateRef.current.value,
               dropoffDate: dropOffDateRef.current.value,
               totalAmount: totalPrice,
+              pickupAddress: pickupAddressRef.current?.value || "",
             }),
           });
         } catch {}
@@ -239,6 +270,9 @@ export default function Reserve() {
         <div style={{ gap: ".7em" }} className="flex-main form-wrapper sub-header-margin">
           <input ref={phoneRef} type="tel" placeholder="Phone number" />
           <input ref={cityRef} type="text" placeholder="City (e.g. Johannesburg)" />
+        </div>
+        <div className="form-wrapper sub-header-margin">
+          <input ref={pickupAddressRef} type="text" placeholder="Pickup address (e.g. 123 Main St, Sandton)" />
         </div>
         <div style={{ gap: ".7em" }} className="flex-main form-wrapper sub-header-margin">
           <div>
